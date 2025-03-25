@@ -197,17 +197,22 @@ onMounted(() => {
     router.push('/')
     return
   }
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', scrollToBottom)
+  }
+
   scrollToBottom()
 })
+
 </script>
 
 <style scoped>
 .chat-container {
-  height: 100vh;
+  height: 100dvh; /* ✅ em mobile, melhor que 100vh */
   display: flex;
   flex-direction: column;
-  width: 100%;
-  background-color: var(--v-theme-background);
+  overflow: hidden;
 }
 
 .chat-header {
