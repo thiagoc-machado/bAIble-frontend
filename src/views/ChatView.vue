@@ -170,7 +170,8 @@ const sendMessage = async () => {
       message: messageText,
       characterId: characterId.value,
       version: route.query.version || 'NVI',
-      language: locale.value
+      language: locale.value,
+      model: route.query.model || 'google/gemini-pro:free'
     })
 
     messages.value.push({
