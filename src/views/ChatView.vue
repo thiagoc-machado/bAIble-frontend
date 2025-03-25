@@ -13,7 +13,7 @@
         <v-avatar class="mx-4" :color="getAvatarColor" size="40">
           {{ characterInitials }}
         </v-avatar>
-        <v-app-bar-title class="text-h6">{{ characterName }}</v-app-bar-title>
+        <v-app-bar-title class="text-h6">{{ characterName }}.</v-app-bar-title>
         <v-btn icon="mdi-brightness-6" @click="toggleTheme" variant="text" />
       </div>
     </v-app-bar>
@@ -243,6 +243,7 @@ onMounted(() => {
   overflow-y: auto;
   padding: 1rem 0;
   width: 100%;
+  padding-top: 64px;
 }
 
 .messages-content {
@@ -312,6 +313,14 @@ onMounted(() => {
   color: var(--v-theme-on-surface-variant);
   font-size: 0.875rem;
   animation: fadeIn 0.3s ease;
+}
+.chat-container,
+.chat-main,
+.messages-container,
+.messages-content {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 @keyframes fadeIn {

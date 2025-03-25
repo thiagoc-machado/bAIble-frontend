@@ -51,6 +51,9 @@ html, body {
   margin: 0 auto;
   padding: 0 1rem;
 }
+html, body {
+  overflow-x: hidden;
+}
 
 @media (max-width: 600px) {
   #app, .v-application, .v-application__wrap {
