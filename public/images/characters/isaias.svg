@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo com gradiente profético -->
+  <circle cx="100" cy="100" r="95" fill="url(#gradient)" />
+  
+  <!-- Rosto de Isaías -->
+  <path d="M100 50 C 70 50, 60 100, 100 120 C 140 100, 130 50, 100 50" fill="#FFE4C4" />
+  
+  <!-- Barba longa -->
+  <path d="M80 90 C 85 85, 115 85, 120 90 C 115 95, 85 95, 80 90" fill="#2F1B1B">
+    <animate attributeName="d" 
+             values="M80 90 C 85 85, 115 85, 120 90 C 115 95, 85 95, 80 90;
+                     M80 90 C 85 88, 115 88, 120 90 C 115 92, 85 92, 80 90;
+                     M80 90 C 85 85, 115 85, 120 90 C 115 95, 85 95, 80 90"
+             dur="4s"
+             repeatCount="indefinite" />
+  </path>
+  
+  <!-- Cabelo -->
+  <path d="M100 40 C 60 40, 40 70, 60 100 C 80 120, 120 120, 140 100 C 160 70, 140 40, 100 40" fill="#2F1B1B">
+    <animate attributeName="d" 
+             values="M100 40 C 60 40, 40 70, 60 100 C 80 120, 120 120, 140 100 C 160 70, 140 40, 100 40;
+                     M100 40 C 65 40, 45 70, 65 100 C 85 120, 115 120, 135 100 C 155 70, 135 40, 100 40;
+                     M100 40 C 60 40, 40 70, 60 100 C 80 120, 120 120, 140 100 C 160 70, 140 40, 100 40"
+             dur="5s"
+             repeatCount="indefinite" />
+  </path>
+  
+  <!-- Olhos visionários -->
+  <circle cx="85" cy="80" r="3" fill="#4A4A4A">
+    <animate attributeName="r" values="3;3.5;3" dur="3s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="115" cy="80" r="3" fill="#4A4A4A">
+    <animate attributeName="r" values="3;3.5;3" dur="3s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Brilho nos olhos -->
+  <circle cx="86" cy="79" r="1" fill="white" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="116" cy="79" r="1" fill="white" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Sobrancelhas expressivas -->
+  <path d="M75 75 C 80 73, 90 73, 95 75" stroke="#2F1B1B" stroke-width="2" fill="none" />
+  <path d="M105 75 C 110 73, 120 73, 125 75" stroke="#2F1B1B" stroke-width="2" fill="none" />
+  
+  <!-- Boca determinada -->
+  <path d="M90 95 C 100 100, 110 100, 120 95" stroke="#2F1B1B" stroke-width="2" fill="none" />
+  
+  <!-- Pergaminho -->
+  <path d="M60 120 C 60 160, 140 160, 140 120" stroke="#8B4513" stroke-width="4" fill="none">
+    <animate attributeName="d" 
+             values="M60 120 C 60 160, 140 160, 140 120;
+                     M60 120 C 60 155, 140 155, 140 120;
+                     M60 120 C 60 160, 140 160, 140 120"
+             dur="3s"
+             repeatCount="indefinite" />
+  </path>
+  
+  <!-- Halo de luz -->
+  <circle cx="100" cy="30" r="15" fill="url(#halo)" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0.9;0.6" dur="3s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Gradientes e definições -->
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#483D8B" />
+      <stop offset="100%" stop-color="#2F4F4F" />
+    </linearGradient>
+    
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD700" />
+      <stop offset="100%" stop-color="#FFA500" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Efeito de luz divina -->
+  <circle cx="100" cy="100" r="95" fill="url(#shine)" opacity="0.2">
+    <animate attributeName="opacity" values="0.2;0.4;0.2" dur="3s" repeatCount="indefinite" />
+  </circle>
+  
+  <defs>
+    <radialGradient id="shine" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="white" />
+      <stop offset="100%" stop-color="transparent" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Estrelas -->
+  <circle cx="80" cy="35" r="2" fill="#FFD700">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="100" cy="30" r="2" fill="#FFD700">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="120" cy="35" r="2" fill="#FFD700">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite" />
+  </circle>
+</svg> 

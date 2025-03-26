@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--v-theme-on-surface);
+  background-color: var(--v-theme-background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,19 +15,19 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--v-theme-primary);
   text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+  color: var(--v-theme-secondary);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--v-theme-background);
 }
 
 h1 {
@@ -42,13 +42,15 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--v-theme-surface);
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: var(--v-theme-primary);
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -59,21 +61,24 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   text-align: center;
+  background-color: var(--v-theme-background);
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--v-theme-on-surface);
+    background-color: var(--v-theme-background);
   }
+
   a:hover {
-    color: #747bff;
+    color: var(--v-theme-secondary);
   }
+
   button {
-    background-color: #f9f9f9;
+    background-color: var(--v-theme-surface);
   }
 }

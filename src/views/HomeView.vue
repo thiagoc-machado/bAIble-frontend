@@ -1,151 +1,160 @@
 <template>
   <v-container class="fill-height pa-0" fluid>
     <v-row justify="center" align="center" no-gutters style="min-height: 100vh;">
-      <v-col cols="12">
-        <div class="app-header text-center">
-          <v-icon icon="mdi-book-cross" size="64" color="primary" class="mb-4" />
-          <h1 class="text-h3 font-weight-bold mb-2 text-black">{{ $t('home.title') }}</h1>
-          <div class="text-subtitle-1 text-medium-emphasis">{{ $t('home.subtitle') }}</div>
-        </div>
+      <v-col cols="12" class="d-flex justify-center">
+        <v-card class="main-card" elevation="8" rounded="lg">
+          <div class="app-header text-center">
+            <div class="header-content">
+              <v-icon icon="mdi-book-cross" size="64" color="white" class="mb-4" />
+              <h1 class="text-h3 font-weight-bold mb-2 text-white">{{ $t('home.title') }}</h1>
+              <div class="text-subtitle-1 text-white">{{ $t('home.subtitle') }}</div>
+            </div>
+          </div>
 
-        <div class="content-wrapper">
-          <v-card
-            class="mx-auto chat-card"
-            :theme="theme"
-            elevation="8"
-            rounded="lg"
-          >
-            <v-card-text class="pa-6">
-              <v-autocomplete
-                v-model="selectedCharacter"
-                :items="characters"
-                :item-title="(item) => t(item.nameKey)"
-                item-value="id"
-                :label="$t('home.selectCharacter')"
-                variant="outlined"
-                class="mb-4"
-                prepend-inner-icon="mdi-account-search"
-                clearable
-                :hide-details="!selectedCharacter"
-              >
-                <template v-slot:prepend>
-                  <v-avatar
-                    :color="getCharacterColor"
-                    :image="selectedCharacter ? undefined : null"
-                    class="mr-2"
-                  >
-                    {{ getCharacterInitials }}
-                  </v-avatar>
-                </template>
-              </v-autocomplete>
-
-              <v-expand-transition>
-                <div v-if="selectedCharacter || showAdvancedOptions">
-                  <v-autocomplete
-                    v-model="selectedVersion"
-                    :items="versions"
-                    item-title="name"
-                    item-value="id"
-                    :label="$t('home.bibleVersion')"
-                    variant="outlined"
-                    class="mb-4"
-                    prepend-inner-icon="mdi-book-open-variant"
-                    hide-details
-                  />
-
-                  <v-autocomplete
-                    v-if="isDevelopment"
-                    v-model="selectedModel"
-                    :items="models"
-                    item-title="name"
-                    item-value="id"
-                    :label="$t('home.aiModel')"
-                    variant="outlined"
-                    class="mb-4"
-                    prepend-inner-icon="mdi-brain"
-                    hide-details
-                  />
-                </div>
-              </v-expand-transition>
-
-              <v-btn
-                block
-                :color="selectedCharacter ? 'primary' : 'secondary'"
-                size="x-large"
-                class="mt-6 mb-8 chat-button"
-                elevation="2"
-                @click="startChat"
-                min-height="56"
-              >
-                <v-icon start icon="mdi-message-text" class="mr-2" />
-                <span class="button-text">{{ chatButtonText }}</span>
-              </v-btn>
-
-              <v-divider class="mb-6" />
-
-              <div class="text-h6 mb-4 d-flex align-center">
-                <v-icon icon="mdi-star" color="warning" class="mr-2" />
-                {{ $t('home.popularCharacters') }}
-              </div>
-
-              <div class="characters-grid">
-                <v-btn
-                  v-for="character in popularCharacters"
-                  :key="character.id"
-                  :color="getRandomColor(character.id)"
-                  class="character-button"
-                  elevation="2"
-                  rounded="pill"
-                  @click="selectPopularCharacter(character)"
-                  min-height="48"
+          <div class="content-wrapper">
+            <v-card class="chat-card" elevation="4" rounded="lg">
+              <v-card-text class="pa-6">
+                <v-autocomplete
+                  v-model="selectedCharacter"
+                  :items="characters"
+                  :item-title="(item) => t(item.nameKey)"
+                  item-value="id"
+                  :label="$t('home.selectCharacter')"
+                  variant="outlined"
+                  class="mb-4 character-select"
+                  prepend-inner-icon="mdi-account-search"
+                  clearable
+                  :menu-props="{ 
+                    location: $vuetify.display.mobile ? 'top' : 'bottom',
+                    offsetY: true,
+                    maxHeight: $vuetify.display.mobile ? '35vh' : '300px',
+                    transition: 'slide-y-transition',
+                    scrollStrategy: 'close'
+                  }"
+                  :hide-details="!selectedCharacter"
+                  bg-color="rgba(255, 255, 255, 0.95)"
                 >
                   <template v-slot:prepend>
-                    <v-avatar size="32" :color="getRandomColor(character.id, 0.8)" class="mr-2">
-                      {{ getInitials(character.name) }}
-                    </v-avatar>
+                    <div class="character-avatar mr-2">
+                      <img 
+                        v-if="selectedCharacter"
+                        :src="getCharacterImage"
+                        :alt="getCharacterName"
+                        class="character-image"
+                      />
+                      <v-icon v-else icon="mdi-account-search" color="grey" />
+                    </div>
                   </template>
-                  <span class="character-name">{{ character.name }}</span>
-                </v-btn>
-              </div>
-            </v-card-text>
-            <div class="text-center mt-4 mb-4">
-              <v-btn
-                icon="mdi-brightness-6"
-                variant="text"
-                @click="toggleTheme"
-                class="mr-2"
-              />
-              <v-btn
-                icon="mdi-cog"
-                variant="text"
-                @click="showAdvancedOptions = !showAdvancedOptions"
-                class="mr-2"
-              />
-              <v-menu>
-                <template v-slot:activator="{ props }">
-                  <v-btn
-                    icon="mdi-translate"
-                    variant="text"
-                    v-bind="props"
-                  />
-                </template>
-                <v-list>
-                  <v-list-item
-                    v-for="lang in availableLanguages"
-                    :key="lang.code"
-                    :value="lang.code"
-                    @click="changeLanguage(lang.code)"
-                    :active="currentLanguage === lang.code"
-                  >
-                    <v-list-item-title>{{ lang.name }}</v-list-item-title>
-                    <v-list-item-subtitle>{{ lang.nativeName }}</v-list-item-subtitle>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-            </div>
-          </v-card>
-          
-        </div>
+                </v-autocomplete>
+
+                <v-expand-transition>
+                  <div v-if="selectedCharacter">
+                    <v-btn
+                      block
+                      color="primary"
+                      size="x-large"
+                      class="mt-6 chat-button"
+                      elevation="2"
+                      @click="startChat"
+                      min-height="56"
+                    >
+                      <v-icon start icon="mdi-message-text" class="mr-2" />
+                      <span class="button-text">{{ chatButtonText }}</span>
+                    </v-btn>
+                  </div>
+                </v-expand-transition>
+
+                <v-divider class="my-6" />
+
+                <div class="text-h6 mb-4 d-flex align-center">
+                  <v-icon icon="mdi-star" color="warning" class="mr-2" />
+                  {{ $t('home.popularCharacters') }}
+                </div>
+
+                <div class="characters-grid">
+                  <v-slide-x-transition group>
+                    <v-btn
+                      v-for="character in popularCharacters"
+                      :key="character.id"
+                      class="character-button"
+                      elevation="2"
+                      @click="selectPopularCharacter(character)"
+                      min-height="80"
+                      block
+                    >
+                      <div class="d-flex align-center w-100">
+                        <div class="character-avatar mr-3">
+                          <img 
+                            :src="getCharacterImageById(character.id)" 
+                            :alt="character.name"
+                            class="character-image"
+                          />
+                        </div>
+                        <div class="character-info flex-grow-1">
+                          <div class="character-name">{{ character.name }}</div>
+                        </div>
+                      </div>
+                    </v-btn>
+                  </v-slide-x-transition>
+                </div>
+              </v-card-text>
+
+              <v-card-actions class="pa-4 d-flex justify-space-between">
+                <v-btn
+                  icon="mdi-brightness-6"
+                  variant="text"
+                  @click="toggleTheme"
+                />
+                
+                <v-menu location="top">
+                  <template v-slot:activator="{ props }">
+                    <v-btn
+                      icon="mdi-cog"
+                      variant="text"
+                      v-bind="props"
+                    />
+                  </template>
+                  <v-list>
+                    <v-list-item>
+                      <v-select
+                        v-model="selectedVersion"
+                        :items="versions"
+                        item-title="name"
+                        item-value="id"
+                        :label="$t('home.bibleVersion')"
+                        variant="outlined"
+                        density="comfortable"
+                        hide-details
+                      />
+                    </v-list-item>
+                  </v-list>
+                </v-menu>
+
+                <v-menu location="top">
+                  <template v-slot:activator="{ props }">
+                    <v-btn
+                      icon="mdi-translate"
+                      variant="text"
+                      v-bind="props"
+                    />
+                  </template>
+                  <v-list>
+                    <v-list-item
+                      v-for="lang in availableLanguages"
+                      :key="lang.code"
+                      :value="lang.code"
+                      @click="changeLanguage(lang.code)"
+                      :active="currentLanguage === lang.code"
+                    >
+                      <v-list-item-title>{{ lang.name }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ lang.nativeName }}</v-list-item-subtitle>
+                    </v-list-item>
+                  </v-list>
+                </v-menu>
+              </v-card-actions>
+            </v-card>
+          </div>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -259,29 +268,66 @@ const popularCharacters = computed(() =>
     name: t(char.nameKey)
   }))
 )
+
+const getCharacterImage = computed(() => {
+  if (!selectedCharacter.value) return null
+  return `/images/characters/${selectedCharacter.value}.svg`
+})
+
+const getCharacterImageById = (id) => {
+  return `/images/characters/${id}.svg`
+}
 </script>
 
 <style scoped>
+.main-card {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  background: transparent;
+  box-shadow: none;
+}
+
 .app-header {
-  background: linear-gradient(135deg, var(--v-theme-primary), var(--v-theme-secondary));
-  color: white;
-  padding: 0rem 0rem 1rem;
+  background: linear-gradient(135deg, #4A90E2, #357ABD);
+  padding: 3rem 1rem 4rem;
   position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 24px 24px 0 0;
+}
+
+.header-content {
+  position: relative;
+  z-index: 2;
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/path/to/pattern.svg') center/cover;
+  opacity: 0.1;
   z-index: 1;
 }
 
 .content-wrapper {
   position: relative;
-  margin-top: 0rem;
+  margin-top: -2rem;
   z-index: 2;
   padding: 0 1rem;
 }
 
 .chat-card {
-  max-width: 800px;
   width: 100%;
   margin: 0 auto;
   border-radius: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(74, 144, 226, 0.15);
 }
 
 .chat-button {
@@ -289,109 +335,201 @@ const popularCharacters = computed(() =>
   text-transform: none;
   font-size: 1.1rem;
   letter-spacing: 0;
+  transition: transform 0.2s;
+  background: linear-gradient(135deg, #4A90E2, #357ABD);
+  color: white;
 }
 
-.button-text {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+.chat-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #357ABD, #4A90E2);
 }
 
 .characters-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+  padding: 1rem 0;
 }
 
 .character-button {
   text-transform: none;
   letter-spacing: 0;
   font-weight: 500;
-  height: auto;
-  padding: 8px 16px;
-  width: 100%;
-  display: flex;
-  align-items: center;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(74, 144, 226, 0.3);
+}
+
+.character-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+}
+
+.character-info {
+  text-align: left;
 }
 
 .character-name {
+  font-size: 1.1rem;
+  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-width: 0;
-  flex: 1;
+  color: #2C3E50;
 }
 
-@media (min-width: 1264px) {
+.character-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(74, 144, 226, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.character-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
+}
+
+.character-select {
+  :deep(.v-field) {
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(74, 144, 226, 0.3);
+  }
+
+  :deep(.v-field:hover) {
+    border-color: rgba(74, 144, 226, 0.5);
+  }
+
+  :deep(.v-field--focused) {
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+  }
+
+  :deep(.v-menu) {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(74, 144, 226, 0.15);
+  }
+
+  :deep(.v-list-item) {
+    border-radius: 8px;
+    margin: 4px 8px;
+  }
+
+  :deep(.v-list-item:hover) {
+    background: rgba(74, 144, 226, 0.1);
+  }
+}
+
+@media (max-width: 1200px) {
   .characters-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-
-  .character-button {
-    padding: 12px 20px;
-  }
 }
 
-@media (min-width: 960px) and (max-width: 1263px) {
+@media (max-width: 900px) {
   .characters-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .character-button {
-    padding: 10px 18px;
-  }
-}
-
-@media (max-width: 959px) {
-  .chat-card {
-    max-width: 100%;
-    margin: 0;
-    border-radius: 0;
-  }
-
-  .characters-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
 
 @media (max-width: 600px) {
   .app-header {
-    padding: 2rem 1rem 6rem;
+    padding: 2rem 1rem 3rem;
+    border-radius: 0;
   }
 
   .content-wrapper {
     padding: 0;
+    margin-top: -1rem;
   }
 
   .chat-card {
-    border-radius: 24px 24px 0 0;
-  }
-
-  .characters-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.75rem;
+    border-radius: 0;
   }
 
   .text-h3 {
     font-size: 2rem !important;
   }
 
+  .characters-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
   .character-button {
-    padding: 8px 14px;
-    font-size: 0.9rem;
+    padding: 12px;
+  }
+
+  .character-avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  :deep(.v-autocomplete) {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 0;
+    margin-bottom: 8px;
+    backdrop-filter: blur(10px);
+  }
+
+  :deep(.v-overlay__content) {
+    max-height: 35vh !important;
+    margin-top: -35vh !important;
+  }
+
+  :deep(.v-list) {
+    max-height: 35vh !important;
+    overflow-y: auto;
+  }
+
+  :deep(.v-list-item) {
+    min-height: 48px !important;
+    padding: 8px !important;
+  }
+
+  :deep(.v-field__input) {
+    min-height: 44px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
   }
 }
 
 /* Animações */
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+  transform: translateY(20px);
+}
+
+.character-button-enter-active,
+.character-button-leave-active {
+  transition: all 0.3s ease;
+}
+
+.character-button-enter-from,
+.character-button-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
 }
 </style>
   

@@ -1,6 +1,10 @@
 <template>
   <v-app>
-    <router-view />
+    <v-main class="main-container">
+      <v-container fluid class="pa-0">
+        <router-view />
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
@@ -18,6 +22,7 @@ html, body {
   padding: 0;
   height: 100%;
   width: 100%;
+  background-color: var(--v-theme-background);
 }
 
 #app {
@@ -26,6 +31,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  background-color: var(--v-theme-background);
 }
 
 .v-application {
@@ -33,6 +39,7 @@ html, body {
   width: 100vw;
   margin: 0 !important;
   padding: 0 !important;
+  background-color: var(--v-theme-background);
 }
 
 .v-application__wrap {
@@ -44,15 +51,24 @@ html, body {
   padding: 0 !important;
   overflow-y: auto;
   overflow-x: hidden;
+  background-color: var(--v-theme-background);
+}
+
+.main-container {
+  background-color: var(--v-theme-background);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 !important;
 }
 
 .container {
   max-width: var(--app-max-width);
   margin: 0 auto;
   padding: 0 1rem;
-}
-html, body {
-  overflow-x: hidden;
+  width: 100%;
 }
 
 @media (max-width: 600px) {
