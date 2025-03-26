@@ -13,7 +13,7 @@
         <v-avatar class="mx-4" :color="getAvatarColor" size="40">
           {{ characterInitials }}
         </v-avatar>
-        <v-app-bar-title class="text-h6">{{ characterName }}.</v-app-bar-title>
+        <v-app-bar-title class="text-h6">{{ characterName }}</v-app-bar-title>
         <v-btn icon="mdi-brightness-6" @click="toggleTheme" variant="text" />
       </div>
     </v-app-bar>
@@ -155,13 +155,12 @@ const sendMessage = async () => {
   const userMessage = {
     text: newMessage.value,
     isUser: true,
-    time: formatTime()
+    timestamp: new Date()
   }
   
   messages.value.push(userMessage)
   const messageText = newMessage.value
   newMessage.value = ''
-  await scrollToBottom()
 
   loading.value = true
   
@@ -170,23 +169,23 @@ const sendMessage = async () => {
       message: messageText,
       characterId: characterId.value,
       version: route.query.version || 'NVI',
-      language: locale.value,
-      model: route.query.model || 'google/gemini-pro:free'
+      language: locale.value, // 👈 já está certo aqui
+      model: 'mistral-7b-instruct',
+      history: messages.value.slice(0, -1)
     })
 
     messages.value.push({
       text: response.message,
       isUser: false,
-      time: formatTime()
+      timestamp: new Date()
     })
 
-    await scrollToBottom()
   } catch (error) {
     console.error('Erro ao enviar mensagem:', error)
     messages.value.push({
       text: t('chat.errorMessage'),
       isUser: false,
-      time: formatTime()
+      timestamp: new Date()
     })
   } finally {
     loading.value = false
@@ -198,22 +197,17 @@ onMounted(() => {
     router.push('/')
     return
   }
-
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', scrollToBottom)
-  }
-
   scrollToBottom()
 })
-
 </script>
 
 <style scoped>
 .chat-container {
-  height: 100dvh; /* ✅ em mobile, melhor que 100vh */
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  width: 100%;
+  background-color: var(--v-theme-background);
 }
 
 .chat-header {
@@ -244,7 +238,6 @@ onMounted(() => {
   overflow-y: auto;
   padding: 1rem 0;
   width: 100%;
-  padding-top: 64px;
 }
 
 .messages-content {
@@ -314,14 +307,6 @@ onMounted(() => {
   color: var(--v-theme-on-surface-variant);
   font-size: 0.875rem;
   animation: fadeIn 0.3s ease;
-}
-.chat-container,
-.chat-main,
-.messages-container,
-.messages-content {
-  box-sizing: border-box;
-  overflow-x: hidden;
-  max-width: 100%;
 }
 
 @keyframes fadeIn {

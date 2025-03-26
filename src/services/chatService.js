@@ -1,40 +1,56 @@
 import axios from 'axios'
+import { useI18n } from 'vue-i18n'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/graphql/'
 
 const chatService = {
-  async sendMessage({ message, characterId, version, language }) {
+  async sendMessage({ message, characterId, version, model, history, language }) {
     try {
       const query = `
-        query {
+        query AskBibleCharacter(
+          $message: String!,
+          $character: String,
+          $version: String!,
+          $language: String!,
+          $model: String!,
+          $history: [ChatMessageInput!]
+        ) {
           askBibleCharacter(
-            message: "${message}",
-            character: "${characterId}",
-            version: "${version}",
-            language: "${language}"
+            message: $message,
+            character: $character,
+            version: $version,
+            language: $language,
+            model: $model,
+            history: $history
           )
         }
       `
 
       const response = await axios.post(API_URL, {
         query,
-        variables: {}
+        variables: {
+          message,
+          character: characterId,
+          version,
+          language,
+          model,
+          history
+        }
       }, {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         }
       })
-
       if (response.data.errors) {
-        throw new Error(response.data.errors[0].message)
+        throw new Error(response.data.errors[0].message);
       }
-
+  
       return {
         message: response.data.data.askBibleCharacter
-      }
+      };
     } catch (error) {
-      console.error('Erro ao enviar mensagem:', error)
-      throw error
+      console.error('Erro ao enviar mensagem:', error);
+      throw error;
     }
   },
 
