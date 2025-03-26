@@ -12,6 +12,10 @@ const routes = [
     path: '/chat/:characterId',
     name: 'chat',
     component: ChatView
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/'
   }
 ]
 
