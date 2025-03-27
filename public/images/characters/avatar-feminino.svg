@@ -6,24 +6,21 @@
   <!-- Rosto -->
   <circle cx="32" cy="30" r="20" fill="#FFE0B2"/>
   
-  <!-- Cabelo ondulado -->
+  <!-- Cabelo -->
   <path fill="#8D6E63" d="M32 10c-12 0-20 8-20 20 0 0 4-12 20-12s20 12 20 12c0-12-8-20-20-20z"/>
-  <path fill="#8D6E63" d="M12 30c0 0 4-6 8-6s8 6 8 6M36 30c0 0 4-6 8-6s8 6 8 6"/>
+  <path fill="#8D6E63" d="M12 30c0 0 4-4 8-4s8 4 8 4M36 30c0 0 4-4 8-4s8 4 8 4"/>
   
   <!-- Olhos -->
   <circle cx="26" cy="26" r="2" fill="#4A4A4A"/>
   <circle cx="38" cy="26" r="2" fill="#4A4A4A"/>
   
   <!-- Sobrancelhas -->
-  <path fill="#8D6E63" d="M24 22c0 0 4-2 6 0M36 22c0 0 4-2 6 0"/>
+  <path fill="#8D6E63" d="M24 22c0 0 4-1 6 0M36 22c0 0 4-1 6 0"/>
   
-  <!-- Sorriso corajoso -->
-  <path fill="none" stroke="#4A4A4A" stroke-width="1.5" d="M26 32c0 0 3 4 12 0" stroke-linecap="round"/>
+  <!-- Sorriso -->
+  <path fill="none" stroke="#4A4A4A" stroke-width="1.5" d="M28 32c0 0 2 2 8 2" stroke-linecap="round"/>
   
   <!-- Brilho nos olhos -->
   <circle cx="25" cy="25" r="0.5" fill="white"/>
   <circle cx="37" cy="25" r="0.5" fill="white"/>
-  
-  <!-- Coroa sutil -->
-  <path fill="none" stroke="#FFD700" stroke-width="1" d="M22 15l10-5 10 5" opacity="0.5"/>
 </svg> 

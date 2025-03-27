@@ -36,12 +36,21 @@
                 >
                   <template v-slot:prepend>
                     <div class="character-avatar mr-2">
-                      <img 
+                      <v-img
                         v-if="selectedCharacter"
                         :src="getCharacterImage"
                         :alt="getCharacterName"
                         class="character-image"
-                      />
+                        @error="e => e.target.src = '/images/characters/avatar-neutro.svg'"
+                      >
+                        <template v-slot:error>
+                          <v-img
+                            src="/images/characters/avatar-neutro.svg"
+                            :alt="getCharacterName"
+                            class="character-image"
+                          />
+                        </template>
+                      </v-img>
                       <v-icon v-else icon="mdi-account-search" color="grey" />
                     </div>
                   </template>
@@ -84,11 +93,20 @@
                     >
                       <div class="d-flex align-center w-100">
                         <div class="character-avatar mr-3">
-                          <img 
-                            :src="getCharacterImageById(character.id)" 
+                          <v-img
+                            :src="getCharacterImageById(character.id)"
                             :alt="character.name"
                             class="character-image"
-                          />
+                            @error="e => e.target.src = '/images/characters/avatar-neutro.svg'"
+                          >
+                            <template v-slot:error>
+                              <v-img
+                                src="/images/characters/avatar-neutro.svg"
+                                :alt="character.name"
+                                class="character-image"
+                              />
+                            </template>
+                          </v-img>
                         </div>
                         <div class="character-info flex-grow-1">
                           <div class="character-name">{{ character.name }}</div>
@@ -296,7 +314,7 @@ const getCharacterImage = computed(() => {
 
 const getCharacterImageById = (id) => {
   return `/images/characters/${id}.svg`
-  }
+}
 
 const availableVersions = computed(() => {
   return versions[locale.value] || versions.pt
@@ -315,7 +333,7 @@ const updateTheme = (newTheme) => {
   }
 }
 
-// Observer para mudanças no sistema
+// Configuração do tema ao montar o componente
 onMounted(() => {
   if (theme.value === 'auto') {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')

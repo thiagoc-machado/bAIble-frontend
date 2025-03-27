@@ -10,13 +10,18 @@
       <div class="header-content">
         <v-btn icon="mdi-arrow-left" @click="goBack" variant="text" />
         <v-avatar class="mx-4" size="40">
-          <img 
-            v-if="characterId"
-            :src="`/images/characters/${characterId}.svg`"
+          <v-img
+            :src="characterAvatar"
             :alt="characterName"
-            class="character-avatar-img"
-          />
-          <v-icon v-else icon="mdi-account" />
+            @error="e => e.target.src = '/images/characters/avatar-neutro.svg'"
+          >
+            <template v-slot:error>
+              <v-img
+                src="/images/characters/avatar-neutro.svg"
+                :alt="characterName"
+              />
+            </template>
+          </v-img>
         </v-avatar>
         <v-app-bar-title class="text-h6">{{ characterName }}</v-app-bar-title>
         <v-btn icon="mdi-brightness-6" @click="toggleTheme" variant="text" />
@@ -123,6 +128,12 @@ const characterInitials = computed(() => {
     .join('')
     .toUpperCase()
     .slice(0, 2)
+})
+
+// Computed property para o avatar com fallback
+const characterAvatar = computed(() => {
+  if (!characterId.value) return null
+  return `/images/characters/${characterId.value}.svg`
 })
 
 const getAvatarColor = computed(() => {

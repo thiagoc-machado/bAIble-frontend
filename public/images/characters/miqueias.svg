@@ -6,29 +6,20 @@
   <!-- Rosto -->
   <circle cx="32" cy="30" r="20" fill="#FFE0B2"/>
   
-  <!-- Barba real -->
-  <path fill="#8D6E63" d="M20 30c0 0 2 15 12 15s12-15 12-15c0 0-4 10-12 10s-12-10-12-10z"/>
-  
-  <!-- Cabelo -->
+  <!-- Cabelo simples -->
   <path fill="#8D6E63" d="M32 10c-12 0-20 8-20 20 0 0 4-10 20-10s20 10 20 10c0-12-8-20-20-20z"/>
-  
-  <!-- Coroa -->
-  <path fill="#FFD700" d="M16 20c0 0 4-4 16-4s16 4 16 4c0 0-2 2-16 2s-16-2-16-2z"/>
   
   <!-- Olhos -->
   <circle cx="26" cy="26" r="2" fill="#4A4A4A"/>
   <circle cx="38" cy="26" r="2" fill="#4A4A4A"/>
   
-  <!-- Sobrancelhas sábias -->
-  <path fill="#8D6E63" d="M24 22c0 0 4-2 6 0M36 22c0 0 4-2 6 0"/>
+  <!-- Sobrancelhas -->
+  <path fill="#8D6E63" d="M24 22c0 0 4-1 6 0M36 22c0 0 4-1 6 0"/>
   
-  <!-- Sorriso real -->
-  <path fill="none" stroke="#4A4A4A" stroke-width="1.5" d="M26 32c0 0 3 4 12 0" stroke-linecap="round"/>
+  <!-- Sorriso -->
+  <path fill="none" stroke="#4A4A4A" stroke-width="1.5" d="M28 32c0 0 2 2 8 2" stroke-linecap="round"/>
   
   <!-- Brilho nos olhos -->
   <circle cx="25" cy="25" r="0.5" fill="white"/>
   <circle cx="37" cy="25" r="0.5" fill="white"/>
-  
-  <!-- Rugas de sabedoria -->
-  <path fill="none" stroke="#4A4A4A" stroke-width="0.5" d="M28 28c0 0 2-1 8-1" opacity="0.5"/>
 </svg> 
