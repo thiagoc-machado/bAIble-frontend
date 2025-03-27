@@ -201,7 +201,11 @@ const sendMessage = async () => {
       version: route.query.version || 'NVI',
       language: locale.value,
       model: 'mistral-7b-instruct',
-      history: messages.value.slice(0, -1)
+      history: messages.value.slice(0, -1).map(msg => ({
+        text: msg.text,
+        isUser: msg.isUser,
+        timestamp: msg.timestamp.toISOString()
+      }))
     })
 
     messages.value.push({
@@ -317,6 +321,7 @@ onMounted(() => {
     rgba(var(--v-theme-surface), 0.95),
     rgba(var(--v-theme-background), 0.95)
   );
+  padding-top: 64px; /* Altura da barra superior */
 }
 
 .messages-container {
@@ -521,6 +526,10 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     overflow: hidden;
+  }
+
+  .chat-main {
+    padding-top: 56px; /* Altura menor da barra superior em dispositivos móveis */
   }
 }
 
