@@ -10,7 +10,14 @@ const messages = {
       aiModel: 'Modelo de IA',
       startChat: 'Falar com {name}',
       startChatDefault: 'Falar com a Bíblia',
-      popularCharacters: 'Personagens Populares'
+      popularCharacters: 'Personagens Populares',
+      theme: 'Tema'
+    },
+    versions: {
+      nvi: 'Nova Versão Internacional',
+      ara: 'Almeida Revista e Atualizada',
+      acf: 'Almeida Corrigida Fiel',
+      ntlh: 'Nova Tradução na Linguagem de Hoje'
     },
     characters: {
       bible: 'Bíblia',
@@ -114,7 +121,14 @@ const messages = {
       aiModel: 'AI Model',
       startChat: 'Chat with {name}',
       startChatDefault: 'Chat with the Bible',
-      popularCharacters: 'Popular Characters'
+      popularCharacters: 'Popular Characters',
+      theme: 'Theme'
+    },
+    versions: {
+      niv: 'New International Version',
+      kjv: 'King James Version',
+      nlt: 'New Living Translation',
+      esv: 'English Standard Version'
     },
     characters: {
       bible: 'Bible',
@@ -218,7 +232,14 @@ const messages = {
       aiModel: 'Modelo de IA',
       startChat: 'Chatear con {name}',
       startChatDefault: 'Chatear con la Biblia',
-      popularCharacters: 'Personajes Populares'
+      popularCharacters: 'Personajes Populares',
+      theme: 'Tema'
+    },
+    versions: {
+      rv1960: 'Reina Valera 1960',
+      nvi_es: 'Nueva Versión Internacional',
+      dhh: 'Dios Habla Hoy',
+      tla: 'Traducción en Lenguaje Actual'
     },
     characters: {
       bible: 'Biblia',

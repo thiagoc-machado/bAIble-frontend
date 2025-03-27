@@ -2,7 +2,6 @@
   <div class="chat-container">
     <!-- Header -->
     <v-app-bar
-      :theme="theme"
       class="chat-header"
       elevation="1"
       density="comfortable"
@@ -10,8 +9,14 @@
     >
       <div class="header-content">
         <v-btn icon="mdi-arrow-left" @click="goBack" variant="text" />
-        <v-avatar class="mx-4" :color="getAvatarColor" size="40">
-          {{ characterInitials }}
+        <v-avatar class="mx-4" size="40">
+          <img 
+            v-if="characterId"
+            :src="`/images/characters/${characterId}.svg`"
+            :alt="characterName"
+            class="character-avatar-img"
+          />
+          <v-icon v-else icon="mdi-account" />
         </v-avatar>
         <v-app-bar-title class="text-h6">{{ characterName }}</v-app-bar-title>
         <v-btn icon="mdi-brightness-6" @click="toggleTheme" variant="text" />
@@ -29,7 +34,6 @@
             :class="{ 'message-user': message.isUser }"
           >
             <v-card
-              :theme="theme"
               :class="[
                 'message-bubble',
                 message.isUser ? 'user-bubble' : 'character-bubble'
@@ -59,19 +63,19 @@
     </main>
 
     <!-- Input -->
-    <footer class="chat-footer" :theme="theme">
+    <footer class="chat-footer">
       <div class="input-content">
         <v-form @submit.prevent="sendMessage" class="d-flex align-center">
           <v-text-field
             v-model="newMessage"
             :placeholder="t('chat.messagePlaceholder')"
             variant="outlined"
-            :theme="theme"
             bg-color="surface"
             hide-details
-            class="mr-2"
+            class="mr-2 message-input"
             density="comfortable"
-            @keyup.enter="sendMessage"
+            @keyup.enter="handleEnter"
+            @focus="scrollToBottom"
           >
             <template v-slot:append-inner>
               <v-btn
@@ -79,7 +83,7 @@
                 color="primary"
                 variant="text"
                 :disabled="!newMessage.trim() || loading"
-                @click="sendMessage"
+                @click="handleSend"
                 size="large"
               />
             </template>
@@ -101,7 +105,6 @@ const route = useRoute()
 const router = useRouter()
 const { t, locale } = useI18n()
 const toggleTheme = inject('toggleTheme')
-const theme = ref('light')
 const newMessage = ref('')
 const messagesContainer = ref(null)
 const messages = ref([])
@@ -134,10 +137,13 @@ const goBack = () => {
   router.push('/')
 }
 
-const scrollToBottom = async () => {
+const scrollToBottom = async (smooth = true) => {
   await nextTick()
   if (messagesContainer.value) {
-    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+    messagesContainer.value.scrollTo({
+      top: messagesContainer.value.scrollHeight,
+      behavior: smooth ? 'smooth' : 'auto'
+    })
   }
 }
 
@@ -149,19 +155,36 @@ const formatTime = () => {
   })
 }
 
+const handleEnter = (event) => {
+  event.preventDefault()
+  if (event.key === 'Enter' && !event.shiftKey) {
+    sendMessage()
+    // Esconde o teclado em dispositivos móveis
+    document.activeElement.blur()
+  }
+}
+
+const handleSend = () => {
+  sendMessage()
+  // Esconde o teclado em dispositivos móveis
+  document.activeElement.blur()
+}
+
 const sendMessage = async () => {
   if (!newMessage.value.trim() || loading.value) return
 
   const userMessage = {
     text: newMessage.value,
     isUser: true,
+    time: formatTime(),
     timestamp: new Date()
   }
   
   messages.value.push(userMessage)
   const messageText = newMessage.value
   newMessage.value = ''
-
+  
+  await scrollToBottom()
   loading.value = true
   
   try {
@@ -169,7 +192,7 @@ const sendMessage = async () => {
       message: messageText,
       characterId: characterId.value,
       version: route.query.version || 'NVI',
-      language: locale.value, // 👈 já está certo aqui
+      language: locale.value,
       model: 'mistral-7b-instruct',
       history: messages.value.slice(0, -1)
     })
@@ -177,14 +200,17 @@ const sendMessage = async () => {
     messages.value.push({
       text: response.message,
       isUser: false,
+      time: formatTime(),
       timestamp: new Date()
     })
 
+    await scrollToBottom()
   } catch (error) {
     console.error('Erro ao enviar mensagem:', error)
     messages.value.push({
       text: t('chat.errorMessage'),
       isUser: false,
+      time: formatTime(),
       timestamp: new Date()
     })
   } finally {
@@ -197,7 +223,15 @@ onMounted(() => {
     router.push('/')
     return
   }
-  scrollToBottom()
+  scrollToBottom(false)
+
+  // Ajusta o viewport em dispositivos móveis quando o teclado aparece
+  if ('visualViewport' in window) {
+    window.visualViewport.addEventListener('resize', () => {
+      document.documentElement.style.height = `${window.visualViewport.height}px`
+      scrollToBottom(false)
+    })
+  }
 })
 </script>
 
@@ -207,22 +241,33 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: var(--v-theme-background);
+  background-color: rgb(var(--v-theme-background));
 }
 
 .chat-header {
   position: sticky;
   top: 0;
   z-index: 100;
+  background-color: rgb(var(--v-theme-surface));
+  border-bottom: 1px solid rgba(var(--v-theme-primary), 0.12);
+  box-shadow: 0 2px 12px rgba(var(--v-theme-primary), 0.08);
 }
 
 .header-content {
   width: 100%;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   padding: 0 1rem;
+  color: rgb(var(--v-theme-on-surface));
+}
+
+.character-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
 }
 
 .chat-main {
@@ -231,6 +276,11 @@ onMounted(() => {
   flex-direction: column;
   width: 100%;
   overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--v-theme-surface), 0.95),
+    rgba(var(--v-theme-background), 0.95)
+  );
 }
 
 .messages-container {
@@ -238,11 +288,17 @@ onMounted(() => {
   overflow-y: auto;
   padding: 1rem 0;
   width: 100%;
+  scroll-behavior: smooth;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--v-theme-primary), 0.05),
+    rgba(var(--v-theme-surface-variant), 0.1)
+  );
 }
 
 .messages-content {
   width: 100%;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -263,17 +319,26 @@ onMounted(() => {
   border-radius: 1.5rem;
   position: relative;
   word-break: break-word;
+  box-shadow: 0 2px 8px rgba(var(--v-theme-primary), 0.08);
+  transition: all 0.2s ease;
+}
+
+.message-bubble:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(var(--v-theme-primary), 0.12);
 }
 
 .user-bubble {
-  background-color: var(--v-theme-primary);
-  color: black;
+  background: linear-gradient(135deg, rgb(var(--v-theme-primary)), rgba(var(--v-theme-primary), 0.9));
+  color: white;
   border-bottom-right-radius: 0.5rem;
 }
 
 .character-bubble {
-  background-color: var(--v-theme-surface-variant);
+  background-color: rgb(var(--v-theme-surface));
+  color: rgb(var(--v-theme-on-surface));
   border-bottom-left-radius: 0.5rem;
+  border: 1px solid rgba(var(--v-theme-primary), 0.15);
 }
 
 .message-time {
@@ -288,25 +353,76 @@ onMounted(() => {
   position: sticky;
   bottom: 0;
   width: 100%;
-  background-color: var(--v-theme-surface);
-  border-top: 1px solid var(--v-border-color);
-  padding: 0.5rem 0;
+  background-color: rgb(var(--v-theme-surface));
+  border-top: 1px solid rgba(var(--v-theme-primary), 0.12);
+  padding: 0.75rem 0;
+  box-shadow: 0 -2px 12px rgba(var(--v-theme-primary), 0.08);
 }
 
 .input-content {
   width: 100%;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+.message-input {
+  :deep(.v-field) {
+    border-radius: 24px;
+    background-color: rgb(var(--v-theme-background));
+    border: 1px solid rgba(var(--v-theme-primary), 0.2);
+    transition: all 0.2s ease;
+  }
+
+  :deep(.v-field:hover) {
+    border-color: rgba(var(--v-theme-primary), 0.4);
+    background-color: rgb(var(--v-theme-background));
+  }
+
+  :deep(.v-field--focused) {
+    background-color: rgb(var(--v-theme-background)) !important;
+    border-color: rgb(var(--v-theme-primary));
+    box-shadow: 0 0 0 1px rgba(var(--v-theme-primary), 0.2),
+                0 4px 12px rgba(var(--v-theme-primary), 0.1);
+  }
+
+  :deep(.v-field__outline) {
+    --v-field-border-opacity: 0;
+  }
+
+  :deep(.v-field__input) {
+    min-height: 48px !important;
+    padding: 12px 16px !important;
+    color: rgb(var(--v-theme-on-surface));
+    font-size: 1rem;
+  }
+
+  :deep(.v-field__append-inner) {
+    padding-inline-end: 8px;
+  }
+
+  :deep(.v-btn) {
+    margin-right: -8px;
+    transition: transform 0.2s ease;
+  }
+
+  :deep(.v-btn:hover) {
+    transform: scale(1.1);
+  }
 }
 
 .typing-indicator {
   display: flex;
   align-items: center;
-  padding: 0.5rem;
-  color: var(--v-theme-on-surface-variant);
+  padding: 0.75rem;
+  margin: 0.5rem;
+  color: rgb(var(--v-theme-on-surface-variant));
   font-size: 0.875rem;
   animation: fadeIn 0.3s ease;
+  background-color: rgb(var(--v-theme-surface));
+  border: 1px solid rgba(var(--v-theme-primary), 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(var(--v-theme-primary), 0.05);
 }
 
 @keyframes fadeIn {
@@ -315,10 +431,6 @@ onMounted(() => {
 }
 
 @media (max-width: 600px) {
-  .message-bubble {
-    max-width: 90%;
-  }
-
   .chat-container {
     height: 100dvh;
   }
@@ -326,7 +438,45 @@ onMounted(() => {
   .header-content,
   .messages-content,
   .input-content {
-    padding: 0 0.5rem;
+    padding: 0 0.75rem;
+  }
+
+  .message-bubble {
+    max-width: 90%;
+  }
+
+  .chat-footer {
+    padding: 0.75rem;
+    background-color: rgb(var(--v-theme-surface));
+  }
+
+  .message-input {
+    margin-right: 0 !important;
+
+    :deep(.v-field) {
+      border-radius: 20px;
+    }
+
+    :deep(.v-field__input) {
+      min-height: 44px !important;
+      padding: 10px 14px !important;
+    }
+  }
+
+  /* Ajustes para o teclado virtual */
+  .messages-container {
+    height: calc(100dvh - 120px);
+  }
+}
+
+/* Previne o scroll da página quando o teclado está aberto */
+@media (max-width: 600px) and (max-height: 400px) {
+  .chat-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }
 </style> 

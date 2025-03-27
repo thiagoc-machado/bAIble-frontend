@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :theme="theme">
     <v-main class="main-container">
       <v-container fluid class="pa-0">
         <router-view />
@@ -9,7 +9,28 @@
 </template>
 
 <script setup>
-// Componente raiz da aplicação
+import { ref, provide, onMounted } from 'vue'
+
+const theme = ref('light')
+
+const toggleTheme = () => {
+  theme.value = theme.value === 'light' ? 'dark' : 'light'
+  localStorage.setItem('theme', theme.value)
+}
+
+onMounted(() => {
+  const savedTheme = localStorage.getItem('theme')
+  if (savedTheme) {
+    theme.value = savedTheme
+  } else {
+    // Verifica se o sistema está em modo escuro
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    theme.value = prefersDark ? 'dark' : 'light'
+  }
+})
+
+// Fornece a função toggleTheme para componentes filhos
+provide('toggleTheme', toggleTheme)
 </script>
 
 <style>

@@ -14,25 +14,25 @@
           <div class="content-wrapper">
             <v-card class="chat-card" elevation="4" rounded="lg">
               <v-card-text class="pa-6">
-                <v-autocomplete
+      <v-autocomplete
                   v-model="selectedCharacter"
-                  :items="characters"
+        :items="characters"
                   :item-title="(item) => t(item.nameKey)"
                   item-value="id"
                   :label="$t('home.selectCharacter')"
                   variant="outlined"
                   class="mb-4 character-select"
                   prepend-inner-icon="mdi-account-search"
-                  clearable
+        clearable
                   :menu-props="{ 
                     location: $vuetify.display.mobile ? 'top' : 'bottom',
                     offsetY: true,
-                    maxHeight: $vuetify.display.mobile ? '35vh' : '300px',
+                    maxHeight: $vuetify.display.mobile ? '140vh' : '300px',
                     transition: 'slide-y-transition',
                     scrollStrategy: 'close'
                   }"
                   :hide-details="!selectedCharacter"
-                  bg-color="rgba(255, 255, 255, 0.95)"
+                  bg-color="surface"
                 >
                   <template v-slot:prepend>
                     <div class="character-avatar mr-2">
@@ -69,8 +69,8 @@
                 <div class="text-h6 mb-4 d-flex align-center">
                   <v-icon icon="mdi-star" color="warning" class="mr-2" />
                   {{ $t('home.popularCharacters') }}
-                </div>
-
+      </div>
+  
                 <div class="characters-grid">
                   <v-slide-x-transition group>
                     <v-btn
@@ -106,7 +106,11 @@
                   @click="toggleTheme"
                 />
                 
-                <v-menu location="top">
+                <v-menu
+                  v-model="settingsMenuOpen"
+                  location="top"
+                  :close-on-content-click="false"
+                >
                   <template v-slot:activator="{ props }">
                     <v-btn
                       icon="mdi-cog"
@@ -118,8 +122,8 @@
                     <v-list-item>
                       <v-select
                         v-model="selectedVersion"
-                        :items="versions"
-                        item-title="name"
+                        :items="availableVersions"
+                        :item-title="item => t(item.nameKey)"
                         item-value="id"
                         :label="$t('home.bibleVersion')"
                         variant="outlined"
@@ -127,12 +131,27 @@
                         hide-details
                       />
                     </v-list-item>
+                    <v-list-item>
+                      <v-select
+                        v-model="theme"
+                        :items="[
+                          { title: 'Auto', value: 'auto' },
+                          { title: 'Light', value: 'light' },
+                          { title: 'Dark', value: 'dark' }
+                        ]"
+                        :label="$t('home.theme')"
+                        variant="outlined"
+                        density="comfortable"
+                        hide-details
+                        @update:model-value="updateTheme"
+                      />
+                    </v-list-item>
                   </v-list>
                 </v-menu>
 
                 <v-menu location="top">
                   <template v-slot:activator="{ props }">
-                    <v-btn
+      <v-btn
                       icon="mdi-translate"
                       variant="text"
                       v-bind="props"
@@ -152,31 +171,32 @@
                   </v-list>
                 </v-menu>
               </v-card-actions>
-            </v-card>
-          </div>
+      </v-card>
+    </div>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
-</template>
-
-<script setup>
-import { ref, computed, inject } from 'vue'
+  </template>
+  
+  <script setup>
+import { ref, computed, inject, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { characters } from '@/data/characters'
-import { versions } from '@/data/versions'
-import { models } from '@/data/models'
-
+  import { characters } from '@/data/characters'
+  import { versions } from '@/data/versions'
+  import { models } from '@/data/models'
+  
 const router = useRouter()
 const { t, locale } = useI18n()
 const toggleTheme = inject('toggleTheme')
-const theme = ref('light')
+const theme = ref(localStorage.getItem('theme') || 'auto')
 const selectedCharacter = ref(null)
-const selectedVersion = ref(null)
+const selectedVersion = ref(localStorage.getItem('bibleVersion') || null)
 const selectedModel = ref(null)
 const showAdvancedOptions = ref(false)
 const isDevelopment = process.env.NODE_ENV === 'development'
+const settingsMenuOpen = ref(false)
 
 const availableLanguages = [
   { code: 'pt', name: 'Portuguese', nativeName: 'Português' },
@@ -276,10 +296,46 @@ const getCharacterImage = computed(() => {
 
 const getCharacterImageById = (id) => {
   return `/images/characters/${id}.svg`
-}
-</script>
+  }
 
-<style scoped>
+const availableVersions = computed(() => {
+  return versions[locale.value] || versions.pt
+})
+
+// Função para atualizar o tema
+const updateTheme = (newTheme) => {
+  theme.value = newTheme
+  localStorage.setItem('theme', newTheme)
+  
+  if (newTheme === 'auto') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    toggleTheme(prefersDark ? 'dark' : 'light')
+  } else {
+    toggleTheme(newTheme)
+  }
+}
+
+// Observer para mudanças no sistema
+onMounted(() => {
+  if (theme.value === 'auto') {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    mediaQuery.addEventListener('change', (e) => {
+      if (theme.value === 'auto') {
+        toggleTheme(e.matches ? 'dark' : 'light')
+      }
+    })
+  }
+})
+
+// Watch para mudanças na versão da Bíblia
+watch(selectedVersion, (newVersion) => {
+  if (newVersion) {
+    localStorage.setItem('bibleVersion', newVersion)
+  }
+})
+  </script>
+  
+  <style scoped>
 .main-card {
   max-width: 1200px;
   width: 100%;
@@ -325,9 +381,9 @@ const getCharacterImageById = (id) => {
   width: 100%;
   margin: 0 auto;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgb(var(--v-theme-surface));
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(74, 144, 226, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 .chat-button {
@@ -358,14 +414,14 @@ const getCharacterImageById = (id) => {
   font-weight: 500;
   border-radius: 16px;
   transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(74, 144, 226, 0.3);
+  background: rgb(var(--v-theme-surface));
+  border: 1px solid rgba(var(--v-theme-primary), 0.3);
 }
 
 .character-button:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+  background: rgb(var(--v-theme-surface-variant));
+  box-shadow: 0 4px 12px rgba(var(--v-theme-primary), 0.2);
 }
 
 .character-info {
@@ -378,7 +434,7 @@ const getCharacterImageById = (id) => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #2C3E50;
+  color: rgb(var(--v-theme-on-surface));
 }
 
 .character-avatar {
@@ -386,8 +442,8 @@ const getCharacterImageById = (id) => {
   height: 64px;
   border-radius: 50%;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid rgba(74, 144, 226, 0.3);
+  background: rgb(var(--v-theme-surface));
+  border: 2px solid rgba(var(--v-theme-primary), 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -403,32 +459,45 @@ const getCharacterImageById = (id) => {
 .character-select {
   :deep(.v-field) {
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(74, 144, 226, 0.3);
+    border: 1px solid rgba(var(--v-theme-primary), 0.3);
   }
 
   :deep(.v-field:hover) {
-    border-color: rgba(74, 144, 226, 0.5);
+    border-color: rgba(var(--v-theme-primary), 0.5);
   }
 
   :deep(.v-field--focused) {
-    border-color: #4A90E2;
-    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+    border-color: rgb(var(--v-theme-primary));
+    box-shadow: 0 0 0 2px rgba(var(--v-theme-primary), 0.2);
   }
 
   :deep(.v-menu) {
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(74, 144, 226, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  :deep(.v-list) {
+    background: rgb(var(--v-theme-surface));
   }
 
   :deep(.v-list-item) {
     border-radius: 8px;
     margin: 4px 8px;
+    color: rgb(var(--v-theme-on-surface));
   }
 
   :deep(.v-list-item:hover) {
-    background: rgba(74, 144, 226, 0.1);
+    background: rgba(var(--v-theme-primary), 0.1);
+  }
+
+  :deep(.v-field__input),
+  :deep(.v-field__label) {
+    color: rgb(var(--v-theme-on-surface));
+  }
+
+  :deep(.v-field__overlay) {
+    background-color: rgb(var(--v-theme-surface));
   }
 }
 
@@ -481,18 +550,19 @@ const getCharacterImageById = (id) => {
     position: sticky;
     top: 0;
     z-index: 10;
-    background: rgba(255, 255, 255, 0.95);
     padding: 8px 0;
     margin-bottom: 8px;
     backdrop-filter: blur(10px);
   }
 
   :deep(.v-overlay__content) {
+    background: rgb(var(--v-theme-surface));
     max-height: 35vh !important;
     margin-top: -35vh !important;
   }
 
   :deep(.v-list) {
+    background: rgb(var(--v-theme-surface));
     max-height: 35vh !important;
     overflow-y: auto;
   }
@@ -530,6 +600,6 @@ const getCharacterImageById = (id) => {
 .character-button-leave-to {
   opacity: 0;
   transform: translateX(-20px);
-}
-</style>
+  }
+  </style>
   
