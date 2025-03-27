@@ -134,6 +134,11 @@
                       icon="mdi-cog"
                       variant="text"
                       v-bind="props"
+                      @mousedown="startPressTimer"
+                      @mouseup="cancelPressTimer"
+                      @mouseleave="cancelPressTimer"
+                      @touchstart="startPressTimer"
+                      @touchend="cancelPressTimer"
                     />
                   </template>
                   <v-list>
@@ -194,6 +199,27 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-dialog v-model="showModelSelect" max-width="400">
+      <v-card>
+        <v-card-title class="text-h5">
+          Selecione o Modelo
+        </v-card-title>
+        <v-card-text>
+          <v-select
+            v-model="selectedModel"
+            :items="models"
+            item-title="name"
+            item-value="id"
+            label="Modelo"
+            variant="outlined"
+            density="comfortable"
+            hide-details
+            @update:model-value="handleModelChange"
+          />
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-container>
   </template>
   
@@ -211,10 +237,12 @@ const toggleTheme = inject('toggleTheme')
 const theme = ref(localStorage.getItem('theme') || 'auto')
 const selectedCharacter = ref(null)
 const selectedVersion = ref(localStorage.getItem('bibleVersion') || null)
-const selectedModel = ref(null)
+const selectedModel = ref(localStorage.getItem('selectedModel') || 'google/gemini-pro:free')
 const showAdvancedOptions = ref(false)
 const isDevelopment = process.env.NODE_ENV === 'development'
 const settingsMenuOpen = ref(false)
+const showModelSelect = ref(false)
+const pressTimer = ref(null)
 
 const availableLanguages = [
   { code: 'pt', name: 'Portuguese', nativeName: 'Português' },
@@ -295,7 +323,8 @@ const startChat = () => {
       characterId: selectedCharacter.value || 'bible'
     },
     query: {
-      version: selectedVersion.value || 'NVI'
+      version: selectedVersion.value || 'NVI',
+      model: selectedModel.value
     }
   })
 }
@@ -351,6 +380,25 @@ watch(selectedVersion, (newVersion) => {
     localStorage.setItem('bibleVersion', newVersion)
   }
 })
+
+const startPressTimer = () => {
+  pressTimer.value = setTimeout(() => {
+    showModelSelect.value = true
+  }, 5000)
+}
+
+const cancelPressTimer = () => {
+  if (pressTimer.value) {
+    clearTimeout(pressTimer.value)
+    pressTimer.value = null
+  }
+}
+
+const handleModelChange = (model) => {
+  selectedModel.value = model
+  localStorage.setItem('selectedModel', model)
+  showModelSelect.value = false
+}
   </script>
   
   <style scoped>
