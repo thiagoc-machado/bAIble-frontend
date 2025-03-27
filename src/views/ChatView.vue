@@ -168,6 +168,10 @@ const handleSend = () => {
   sendMessage()
   // Esconde o teclado em dispositivos móveis
   document.activeElement.blur()
+  // Força o scroll para baixo após enviar
+  nextTick(() => {
+    scrollToBottom(false)
+  })
 }
 
 const sendMessage = async () => {
@@ -184,7 +188,10 @@ const sendMessage = async () => {
   const messageText = newMessage.value
   newMessage.value = ''
   
-  await scrollToBottom()
+  // Força o scroll para baixo após adicionar a mensagem do usuário
+  await nextTick()
+  scrollToBottom(false)
+  
   loading.value = true
   
   try {
@@ -204,7 +211,9 @@ const sendMessage = async () => {
       timestamp: new Date()
     })
 
-    await scrollToBottom()
+    // Força o scroll para baixo após receber a resposta
+    await nextTick()
+    scrollToBottom(false)
   } catch (error) {
     console.error('Erro ao enviar mensagem:', error)
     messages.value.push({
@@ -223,15 +232,42 @@ onMounted(() => {
     router.push('/')
     return
   }
-  scrollToBottom(false)
 
-  // Ajusta o viewport em dispositivos móveis quando o teclado aparece
+  // Ajusta o viewport em dispositivos móveis
   if ('visualViewport' in window) {
-    window.visualViewport.addEventListener('resize', () => {
-      document.documentElement.style.height = `${window.visualViewport.height}px`
+    const updateViewport = () => {
+      const viewport = window.visualViewport
+      const height = viewport.height
+      const offsetTop = viewport.offsetTop
+      
+      // Ajusta a altura do container principal
+      document.documentElement.style.height = `${height}px`
+      
+      // Ajusta a altura do container de mensagens
+      if (messagesContainer.value) {
+        const headerHeight = document.querySelector('.chat-header')?.offsetHeight || 0
+        const footerHeight = document.querySelector('.chat-footer')?.offsetHeight || 0
+        const availableHeight = height - headerHeight - footerHeight
+        
+        messagesContainer.value.style.height = `${availableHeight}px`
+      }
+      
+      // Força o scroll para baixo
       scrollToBottom(false)
-    })
+    }
+
+    // Atualiza quando o viewport muda (teclado aparece/desaparece)
+    window.visualViewport.addEventListener('resize', updateViewport)
+    window.visualViewport.addEventListener('scroll', updateViewport)
+    
+    // Atualiza inicialmente
+    updateViewport()
   }
+
+  // Força o scroll para baixo inicial
+  nextTick(() => {
+    scrollToBottom(false)
+  })
 })
 </script>
 
@@ -433,6 +469,12 @@ onMounted(() => {
 @media (max-width: 600px) {
   .chat-container {
     height: 100dvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
   }
 
   .header-content,
@@ -448,6 +490,9 @@ onMounted(() => {
   .chat-footer {
     padding: 0.75rem;
     background-color: rgb(var(--v-theme-surface));
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
   }
 
   .message-input {
@@ -463,20 +508,26 @@ onMounted(() => {
     }
   }
 
-  /* Ajustes para o teclado virtual */
   .messages-container {
     height: calc(100dvh - 120px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* Previne o scroll da página quando o teclado está aberto */
+  body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 }
 
-/* Previne o scroll da página quando o teclado está aberto */
+/* Ajustes específicos para quando o teclado está aberto */
 @media (max-width: 600px) and (max-height: 400px) {
-  .chat-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  .messages-container {
+    height: calc(100dvh - 100px);
   }
 }
 </style> 
