@@ -363,7 +363,7 @@ const updateTheme = (newTheme) => {
 }
 
 // Configuração do tema ao montar o componente
-onMounted(() => {
+  onMounted(() => {
   if (theme.value === 'auto') {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     mediaQuery.addEventListener('change', (e) => {
@@ -398,7 +398,7 @@ const handleModelChange = (model) => {
   selectedModel.value = model
   localStorage.setItem('selectedModel', model)
   showModelSelect.value = false
-}
+  }
   </script>
   
   <style scoped>
