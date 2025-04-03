@@ -152,6 +152,7 @@
                         variant="outlined"
                         density="comfortable"
                         hide-details
+                        class="mt-2"
                       />
                     </v-list-item>
                     <v-list-item>
@@ -167,6 +168,7 @@
                         density="comfortable"
                         hide-details
                         @update:model-value="updateTheme"
+                        class="mt-2"
                       />
                     </v-list-item>
                   </v-list>
@@ -220,6 +222,37 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+
+    <v-footer class="footer-links">
+      <v-row justify="center" class="text-center">
+        <v-col cols="12">
+          <v-btn
+            variant="text"
+            size="small"
+            class="mx-1"
+            :to="{ name: 'privacy' }"
+          >
+            {{ $t('privacy.title') }}
+          </v-btn>
+          <v-btn
+            variant="text"
+            size="small"
+            class="mx-1"
+            :to="{ name: 'terms' }"
+          >
+            {{ $t('terms.title') }}
+          </v-btn>
+          <v-btn
+            variant="text"
+            size="small"
+            class="mx-1"
+            :to="{ name: 'contact' }"
+          >
+            {{ $t('contact.title') }}
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-footer>
   </v-container>
   </template>
   
@@ -667,5 +700,31 @@ const handleModelChange = (model) => {
   opacity: 0;
   transform: translateX(-20px);
   }
+
+.footer-links {
+  /* position: fixed; */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  z-index: 1;
+  padding: 8px;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.footer-links:hover {
+  opacity: 1;
+}
+
+.footer-links :deep(.v-btn) {
+  text-transform: none;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.footer-links :deep(.v-btn:hover) {
+  opacity: 1;
+}
   </style>
   
