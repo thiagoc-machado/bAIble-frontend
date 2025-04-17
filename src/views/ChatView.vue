@@ -60,7 +60,7 @@
                 size="24"
                 class="mr-2"
               />
-              <span>{{ t('chat.typing', { name: characterName }) }}</span>
+              <span>{{ characterName + ' ' + t('chat.typing') }}</span>
             </div>
           </v-fade-transition>
         </div>

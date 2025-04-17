@@ -23,7 +23,7 @@
     "clear": "Clear Chat",
     "loading": "Thinking...",
     "error": "Error sending message. Please try again.",
-    "typing": "Typing...",
+    "typing": "is typing...",
     "messagePlaceholder": "Type your message here..."
   },
   "characters": {

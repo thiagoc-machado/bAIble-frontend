@@ -23,7 +23,7 @@
     "clear": "Limpiar Chat",
     "loading": "Pensando...",
     "error": "Error al enviar mensaje. Por favor, inténtalo de nuevo.",
-    "typing": "Escribiendo...",
+    "typing": "está escribiendo...",
     "messagePlaceholder": "Escribe tu mensaje aquí..."
   },
   "characters": {

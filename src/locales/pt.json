@@ -23,7 +23,7 @@
     "clear": "Limpar Conversa",
     "loading": "Pensando...",
     "error": "Erro ao enviar mensagem. Tente novamente.",
-    "typing": "Digitando...",
+    "typing": "esta digitando...",
     "messagePlaceholder": "Digite sua mensagem aqui..."
   },
   "characters": {
