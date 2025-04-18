@@ -371,11 +371,11 @@ const popularCharacters = computed(() =>
 
 const getCharacterImage = computed(() => {
   if (!selectedCharacter.value) return null
-  return `/images/characters/${selectedCharacter.value}.svg`
+  return `/images/characters/${selectedCharacter.value}.png`
 })
 
 const getCharacterImageById = (id) => {
-  return `/images/characters/${id}.svg`
+  return `/images/characters/${id}.png`
 }
 
 const availableVersions = computed(() => {

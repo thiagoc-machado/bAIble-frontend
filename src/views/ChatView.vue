@@ -13,11 +13,11 @@
           <v-img
             :src="characterAvatar"
             :alt="characterName"
-            @error="e => e.target.src = '/images/characters/avatar-neutro.svg'"
+            @error="e => e.target.src = '/images/characters/avatar-neutro.png'"
           >
             <template v-slot:error>
               <v-img
-                src="/images/characters/avatar-neutro.svg"
+                src="/images/characters/avatar-neutro.png"
                 :alt="characterName"
               />
             </template>
@@ -133,7 +133,7 @@ const characterInitials = computed(() => {
 // Computed property para o avatar com fallback
 const characterAvatar = computed(() => {
   if (!characterId.value) return null
-  return `/images/characters/${characterId.value}.svg`
+  return `/images/characters/${characterId.value}.png`
 })
 
 const getAvatarColor = computed(() => {
