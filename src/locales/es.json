@@ -1,194 +1,197 @@
 {
-  "home": {
-    "title": "bAIble",
-    "subtitle": "Chatea con personajes bíblicos",
-    "selectCharacter": "Selecciona un personaje",
-    "startChat": "Chatear con {name}",
-    "startChatDefault": "Iniciar Chat",
-    "popularCharacters": "Personajes Populares",
-    "bibleVersion": "Versión de la Biblia",
-    "theme": "Tema",
-    "language": "Idioma"
-  },
+    "home": {
+        "title": "bAIble",
+        "subtitle": "Chatea con personajes bíblicos",
+        "selectCharacter": "Selecciona un personaje",
+        "startChat": "Chatear con {name}",
+        "startChatDefault": "Iniciar Chat",
+        "popularCharacters": "Personajes Populares",
+        "bibleVersion": "Versión de la Biblia",
+        "theme": "Tema",
+        "language": "Idioma",
+        "adsContent1": "bAIble te permite conversar con personajes bíblicos mediante inteligencia artificial, basado exclusivamente en las Escrituras.",
+        "adsContent2": "Puedes elegir el idioma, la versión de la Biblia e interactuar con personajes como Jesús, Pablo, María y muchos más.",
+        "adsContent3": "Ideal para estudios bíblicos, aprendizaje y momentos de reflexión espiritual."
+    },
     "versions": {
         "rv1960": "Versión RV1960",
         "nvi-es": "Versión NVI",
         "dhh": "Versión DHH",
         "tla": "Versión TLA"
     },
-  "chat": {
-    "title": "Chat con {name}",
-    "placeholder": "Escribe tu mensaje...",
-    "send": "Enviar",
-    "clear": "Limpiar Chat",
-    "loading": "Pensando...",
-    "error": "Error al enviar mensaje. Por favor, inténtalo de nuevo.",
-    "typing": "está escribiendo...",
-    "messagePlaceholder": "Escribe tu mensaje aquí..."
-  },
-  "characters": {
-    "bible": "Biblia",
-    "jesus": "Jesús",
-    "abrao": "Abraham",
-    "moises": "Moisés",
-    "davi": "David",
-    "salomao": "Salomón",
-    "isaias": "Isaías",
-    "jeremias": "Jeremías",
-    "daniel": "Daniel",
-    "oseias": "Oseas",
-    "joel": "Joel",
-    "amos": "Amós",
-    "obadias": "Abdías",
-    "jonas": "Jonás",
-    "miqueias": "Miqueas",
-    "naum": "Nahum",
-    "habacuque": "Habacuc",
-    "sofonias": "Sofonías",
-    "ageu": "Hageo",
-    "zacarias": "Zacarías",
-    "malaquias": "Malaquías",
-    "mateus": "Mateo",
-    "marcos": "Marcos",
-    "lucas": "Lucas",
-    "joao": "Juan",
-    "paulo": "Pablo",
-    "pedro": "Pedro",
-    "tiago": "Santiago",
-    "judas": "Judas",
-    "mary": "María",
-    "elias": "Elías",
-    "eliseu": "Eliseo",
-    "noe": "Noé",
-    "jaco": "Jacob",
-    "isaque": "Isaac",
-    "jose": "José",
-    "rute": "Rut",
-    "ester": "Ester",
-    "sara": "Sara",
-    "rebeca": "Rebeca",
-    "lia": "Lea",
-    "raquel": "Raquel",
-    "marta": "Marta",
-    "lazaro": "Lázaro",
-    "barnabe": "Bernabé",
-    "estevao": "Esteban",
-    "timoteo": "Timoteo",
-    "tito": "Tito",
-    "filipe": "Felipe",
-    "tome": "Tomás",
-    "andre": "Andrés",
-    "bartolomeu": "Bartolomé",
-    "matias": "Matías",
-    "gideao": "Gedeón",
-    "samuel": "Samuel",
-    "esdras": "Esdras",
-    "neemias": "Nehemías",
-    "jo": "Job",
-    "ana": "Ana",
-    "simeao": "Simeón",
-    "priscila": "Priscila",
-    "aquila": "Aquila",
-    "urias": "Urías",
-    "jesse": "Isaí",
-    "eli": "Elí",
-    "abigail": "Abigail",
-    "manasses": "Manasés",
-    "ruben": "Rubén",
-    "benjamim": "Benjamín",
-    "naftali": "Neftalí",
-    "zebulom": "Zabulón",
-    "aser": "Aser",
-    "gade": "Gad",
-    "juda": "Judá",
-    "levi": "Leví",
-    "da": "Dan",
-    "calebe": "Caleb",
-    "bezalel": "Bezaleel",
-    "zipora": "Séfora",
-    "tamar": "Tamar",
-    "dalila": "Dalila",
-    "jezabel": "Jezabel",
-    "noemi": "Noemí",
-    "boaz": "Booz"
-  },
-  "privacy": {
-    "title": "Política de Privacidad",
-    "lastUpdated": "Última actualización: 2024",
-    "dataCollection": {
-      "title": "Recopilación de Datos",
-      "content": "Solo recopilamos la información necesaria para mejorar tu experiencia en la aplicación. No compartimos tus datos personales con terceros."
+    "chat": {
+        "title": "Chat con {name}",
+        "placeholder": "Escribe tu mensaje...",
+        "send": "Enviar",
+        "clear": "Limpiar Chat",
+        "loading": "Pensando...",
+        "error": "Error al enviar mensaje. Por favor, inténtalo de nuevo.",
+        "typing": "está escribiendo...",
+        "messagePlaceholder": "Escribe tu mensaje aquí..."
     },
-    "cookies": {
-      "title": "Cookies",
-      "content": "Utilizamos cookies para mejorar tu experiencia. Puedes desactivar las cookies en la configuración de tu navegador."
+    "characters": {
+        "bible": "Biblia",
+        "jesus": "Jesús",
+        "abrao": "Abraham",
+        "moises": "Moisés",
+        "davi": "David",
+        "salomao": "Salomón",
+        "isaias": "Isaías",
+        "jeremias": "Jeremías",
+        "daniel": "Daniel",
+        "oseias": "Oseas",
+        "joel": "Joel",
+        "amos": "Amós",
+        "obadias": "Abdías",
+        "jonas": "Jonás",
+        "miqueias": "Miqueas",
+        "naum": "Nahum",
+        "habacuque": "Habacuc",
+        "sofonias": "Sofonías",
+        "ageu": "Hageo",
+        "zacarias": "Zacarías",
+        "malaquias": "Malaquías",
+        "mateus": "Mateo",
+        "marcos": "Marcos",
+        "lucas": "Lucas",
+        "joao": "Juan",
+        "paulo": "Pablo",
+        "pedro": "Pedro",
+        "tiago": "Santiago",
+        "judas": "Judas",
+        "mary": "María",
+        "elias": "Elías",
+        "eliseu": "Eliseo",
+        "noe": "Noé",
+        "jaco": "Jacob",
+        "isaque": "Isaac",
+        "jose": "José",
+        "rute": "Rut",
+        "ester": "Ester",
+        "sara": "Sara",
+        "rebeca": "Rebeca",
+        "lia": "Lea",
+        "raquel": "Raquel",
+        "marta": "Marta",
+        "lazaro": "Lázaro",
+        "barnabe": "Bernabé",
+        "estevao": "Esteban",
+        "timoteo": "Timoteo",
+        "tito": "Tito",
+        "filipe": "Felipe",
+        "tome": "Tomás",
+        "andre": "Andrés",
+        "bartolomeu": "Bartolomé",
+        "matias": "Matías",
+        "gideao": "Gedeón",
+        "samuel": "Samuel",
+        "esdras": "Esdras",
+        "neemias": "Nehemías",
+        "jo": "Job",
+        "ana": "Ana",
+        "simeao": "Simeón",
+        "priscila": "Priscila",
+        "aquila": "Aquila",
+        "urias": "Urías",
+        "jesse": "Isaí",
+        "eli": "Elí",
+        "abigail": "Abigail",
+        "manasses": "Manasés",
+        "ruben": "Rubén",
+        "benjamim": "Benjamín",
+        "naftali": "Neftalí",
+        "zebulom": "Zabulón",
+        "aser": "Aser",
+        "gade": "Gad",
+        "juda": "Judá",
+        "levi": "Leví",
+        "da": "Dan",
+        "calebe": "Caleb",
+        "bezalel": "Bezaleel",
+        "zipora": "Séfora",
+        "tamar": "Tamar",
+        "dalila": "Dalila",
+        "jezabel": "Jezabel",
+        "noemi": "Noemí",
+        "boaz": "Booz"
     },
-    "thirdParty": {
-      "title": "Servicios de Terceros",
-      "content": "Utilizamos servicios de terceros para análisis y publicidad. Estos servicios pueden recopilar datos anónimos sobre tu uso."
+    "privacy": {
+        "title": "Política de Privacidad",
+        "lastUpdated": "Última actualización: 2024",
+        "dataCollection": {
+            "title": "Recopilación de Datos",
+            "content": "Solo recopilamos la información necesaria para mejorar tu experiencia en la aplicación. No compartimos tus datos personales con terceros."
+        },
+        "cookies": {
+            "title": "Cookies",
+            "content": "Utilizamos cookies para mejorar tu experiencia. Puedes desactivar las cookies en la configuración de tu navegador."
+        },
+        "thirdParty": {
+            "title": "Servicios de Terceros",
+            "content": "Utilizamos servicios de terceros para análisis y publicidad. Estos servicios pueden recopilar datos anónimos sobre tu uso."
+        },
+        "ads": {
+            "title": "Publicidad",
+            "content": "Utilizamos anuncios para mantener el servicio gratuito. Los anuncios están personalizados según tus intereses."
+        },
+        "contact": {
+            "title": "Contacto",
+            "content": "Para preguntas sobre privacidad, contáctanos a través del formulario de contacto."
+        }
     },
-    "ads": {
-      "title": "Publicidad",
-      "content": "Utilizamos anuncios para mantener el servicio gratuito. Los anuncios están personalizados según tus intereses."
+    "terms": {
+        "title": "Términos de Servicio",
+        "lastUpdated": "Última actualización: 2024",
+        "acceptance": {
+            "title": "Aceptación de los Términos",
+            "content": "Al usar nuestro servicio, aceptas estos términos de servicio."
+        },
+        "usage": {
+            "title": "Uso del Servicio",
+            "content": "El servicio se proporciona 'tal cual' y debe usarse de acuerdo con las leyes aplicables. Las conversaciones con personajes bíblicos son generadas por inteligencia artificial y pueden no reflejar completamente los eventos o enseñanzas bíblicas."
+        },
+        "aiDisclaimer": {
+            "title": "Declaración sobre Inteligencia Artificial",
+            "content": "Las respuestas e interacciones con personajes bíblicos son generadas por modelos de lenguaje de IA. Aunque nos esforzamos por mantener la precisión y fidelidad al texto bíblico, las respuestas pueden contener imprecisiones o interpretaciones que no reflejan la doctrina oficial de ninguna denominación religiosa. Recomendamos que siempre consultes la Biblia y autoridades religiosas calificadas para asuntos de fe y doctrina."
+        },
+        "intellectual": {
+            "title": "Propiedad Intelectual",
+            "content": "Todo el contenido del servicio está protegido por derechos de autor y otras leyes de propiedad intelectual. Las conversaciones generadas por IA son para uso personal y no deben reproducirse o distribuirse sin permiso."
+        },
+        "liability": {
+            "title": "Responsabilidad",
+            "content": "No nos hacemos responsables de daños indirectos causados por el uso del servicio. Las respuestas generadas por IA son para fines educativos y de entretenimiento, y no deben considerarse como consejo espiritual o religioso."
+        },
+        "changes": {
+            "title": "Cambios en los Términos",
+            "content": "Nos reservamos el derecho de modificar estos términos en cualquier momento."
+        }
     },
     "contact": {
-      "title": "Contacto",
-      "content": "Para preguntas sobre privacidad, contáctanos a través del formulario de contacto."
+        "title": "Contacto",
+        "description": "¿Tienes alguna pregunta, sugerencia o comentario? ¡Contáctanos!",
+        "form": {
+            "name": "Nombre",
+            "email": "Correo electrónico",
+            "subject": "Asunto",
+            "message": "Mensaje",
+            "submit": "Enviar"
+        },
+        "validation": {
+            "nameRequired": "El nombre es obligatorio",
+            "nameMin": "El nombre debe tener al menos 2 caracteres",
+            "emailRequired": "El correo electrónico es obligatorio",
+            "emailValid": "El correo electrónico debe ser válido",
+            "subjectRequired": "El asunto es obligatorio",
+            "subjectMin": "El asunto debe tener al menos 3 caracteres",
+            "messageRequired": "El mensaje es obligatorio",
+            "messageMin": "El mensaje debe tener al menos 10 caracteres"
+        },
+        "success": "¡Mensaje enviado con éxito!",
+        "error": "Error al enviar mensaje. Por favor, inténtalo de nuevo.",
+        "info": {
+            "title": "Información Adicional",
+            "content": "Para asuntos urgentes o soporte técnico, también puedes contactarnos en: support@baible.com"
+        }
     }
-  },
-  "terms": {
-    "title": "Términos de Servicio",
-    "lastUpdated": "Última actualización: 2024",
-    "acceptance": {
-      "title": "Aceptación de los Términos",
-      "content": "Al usar nuestro servicio, aceptas estos términos de servicio."
-    },
-    "usage": {
-      "title": "Uso del Servicio",
-      "content": "El servicio se proporciona 'tal cual' y debe usarse de acuerdo con las leyes aplicables. Las conversaciones con personajes bíblicos son generadas por inteligencia artificial y pueden no reflejar completamente los eventos o enseñanzas bíblicas."
-    },
-    "aiDisclaimer": {
-      "title": "Declaración sobre Inteligencia Artificial",
-      "content": "Las respuestas e interacciones con personajes bíblicos son generadas por modelos de lenguaje de IA. Aunque nos esforzamos por mantener la precisión y fidelidad al texto bíblico, las respuestas pueden contener imprecisiones o interpretaciones que no reflejan la doctrina oficial de ninguna denominación religiosa. Recomendamos que siempre consultes la Biblia y autoridades religiosas calificadas para asuntos de fe y doctrina."
-    },
-    "intellectual": {
-      "title": "Propiedad Intelectual",
-      "content": "Todo el contenido del servicio está protegido por derechos de autor y otras leyes de propiedad intelectual. Las conversaciones generadas por IA son para uso personal y no deben reproducirse o distribuirse sin permiso."
-    },
-    "liability": {
-      "title": "Responsabilidad",
-      "content": "No nos hacemos responsables de daños indirectos causados por el uso del servicio. Las respuestas generadas por IA son para fines educativos y de entretenimiento, y no deben considerarse como consejo espiritual o religioso."
-    },
-    "changes": {
-      "title": "Cambios en los Términos",
-      "content": "Nos reservamos el derecho de modificar estos términos en cualquier momento."
-    }
-  },
-  "contact": {
-    "title": "Contacto",
-    "description": "¿Tienes alguna pregunta, sugerencia o comentario? ¡Contáctanos!",
-    "form": {
-      "name": "Nombre",
-      "email": "Correo electrónico",
-      "subject": "Asunto",
-      "message": "Mensaje",
-      "submit": "Enviar"
-    },
-    "validation": {
-      "nameRequired": "El nombre es obligatorio",
-      "nameMin": "El nombre debe tener al menos 2 caracteres",
-      "emailRequired": "El correo electrónico es obligatorio",
-      "emailValid": "El correo electrónico debe ser válido",
-      "subjectRequired": "El asunto es obligatorio",
-      "subjectMin": "El asunto debe tener al menos 3 caracteres",
-      "messageRequired": "El mensaje es obligatorio",
-      "messageMin": "El mensaje debe tener al menos 10 caracteres"
-    },
-    "success": "¡Mensaje enviado con éxito!",
-    "error": "Error al enviar mensaje. Por favor, inténtalo de nuevo.",
-    "info": {
-      "title": "Información Adicional",
-      "content": "Para asuntos urgentes o soporte técnico, también puedes contactarnos en: support@baible.com"
-    }
-  }
-} 
+}

@@ -8,7 +8,10 @@
     "popularCharacters": "Personagens Populares",
     "bibleVersion": "Versão da Bíblia",
     "theme": "Tema",
-    "language": "Idioma"
+    "language": "Idioma",
+    "adsContent1": "bAIble permite conversar com personagens bíblicos por meio de inteligência artificial, com base exclusiva nas Escrituras Sagradas.",
+    "adsContent2": "Você pode escolher o idioma, a versão da Bíblia e interagir com figuras como Jesus, Paulo, Maria e muitos outros.",
+    "adsContent3": "Ideal para estudos bíblicos, aprendizado e momentos de reflexão espiritual."
   },
   "versions": {
     "nvi": "Versão NVI",

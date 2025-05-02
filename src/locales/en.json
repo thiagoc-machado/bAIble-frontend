@@ -1,194 +1,197 @@
 {
-  "home": {
-    "title": "bAIble",
-    "subtitle": "Chat with biblical characters",
-    "selectCharacter": "Select a character",
-    "startChat": "Chat with {name}",
-    "startChatDefault": "Start Chat",
-    "popularCharacters": "Popular Characters",
-    "bibleVersion": "Bible Version",
-    "theme": "Theme",
-    "language": "Language"
-  },
-  "versions": {
-    "niv": "Version RV1960",
-    "kjv": "Version NVI",
-    "nlt": "Version DHH",
-    "esv": "Version TLA"
-  },
-  "chat": {
-    "title": "Chat with {name}",
-    "placeholder": "Type your message...",
-    "send": "Send",
-    "clear": "Clear Chat",
-    "loading": "Thinking...",
-    "error": "Error sending message. Please try again.",
-    "typing": "is typing...",
-    "messagePlaceholder": "Type your message here..."
-  },
-  "characters": {
-    "bible": "Bible",
-    "jesus": "Jesus",
-    "abrao": "Abraham",
-    "moises": "Moses",
-    "davi": "David",
-    "salomao": "Solomon",
-    "isaias": "Isaiah",
-    "jeremias": "Jeremiah",
-    "daniel": "Daniel",
-    "oseias": "Hosea",
-    "joel": "Joel",
-    "amos": "Amos",
-    "obadias": "Obadiah",
-    "jonas": "Jonah",
-    "miqueias": "Micah",
-    "naum": "Nahum",
-    "habacuque": "Habakkuk",
-    "sofonias": "Zephaniah",
-    "ageu": "Haggai",
-    "zacarias": "Zechariah",
-    "malaquias": "Malachi",
-    "mateus": "Matthew",
-    "marcos": "Mark",
-    "lucas": "Luke",
-    "joao": "John",
-    "paulo": "Paul",
-    "pedro": "Peter",
-    "tiago": "James",
-    "judas": "Jude",
-    "mary": "Mary",
-    "elias": "Elijah",
-    "eliseu": "Elisha",
-    "noe": "Noah",
-    "jaco": "Jacob",
-    "isaque": "Isaac",
-    "jose": "Joseph",
-    "rute": "Ruth",
-    "ester": "Esther",
-    "sara": "Sarah",
-    "rebeca": "Rebecca",
-    "lia": "Leah",
-    "raquel": "Rachel",
-    "marta": "Martha",
-    "lazaro": "Lazarus",
-    "barnabe": "Barnabas",
-    "estevao": "Stephen",
-    "timoteo": "Timothy",
-    "tito": "Titus",
-    "filipe": "Philip",
-    "tome": "Thomas",
-    "andre": "Andrew",
-    "bartolomeu": "Bartholomew",
-    "matias": "Matthias",
-    "gideao": "Gideon",
-    "samuel": "Samuel",
-    "esdras": "Ezra",
-    "neemias": "Nehemiah",
-    "jo": "Job",
-    "ana": "Hannah",
-    "simeao": "Simeon",
-    "priscila": "Priscilla",
-    "aquila": "Aquila",
-    "urias": "Uriah",
-    "jesse": "Jesse",
-    "eli": "Eli",
-    "abigail": "Abigail",
-    "manasses": "Manasseh",
-    "ruben": "Reuben",
-    "benjamim": "Benjamin",
-    "naftali": "Naphtali",
-    "zebulom": "Zebulun",
-    "aser": "Asher",
-    "gade": "Gad",
-    "juda": "Judah",
-    "levi": "Levi",
-    "da": "Dan",
-    "calebe": "Caleb",
-    "bezalel": "Bezalel",
-    "zipora": "Zipporah",
-    "tamar": "Tamar",
-    "dalila": "Delilah",
-    "jezabel": "Jezebel",
-    "noemi": "Naomi",
-    "boaz": "Boaz"
-  },
-  "privacy": {
-    "title": "Privacy Policy",
-    "lastUpdated": "Last updated: 2024",
-    "dataCollection": {
-      "title": "Data Collection",
-      "content": "We only collect information necessary to improve your experience in the app. We do not share your personal data with third parties."
+    "home": {
+        "title": "bAIble",
+        "subtitle": "Chat with biblical characters",
+        "selectCharacter": "Select a character",
+        "startChat": "Chat with {name}",
+        "startChatDefault": "Start Chat",
+        "popularCharacters": "Popular Characters",
+        "bibleVersion": "Bible Version",
+        "theme": "Theme",
+        "language": "Language",
+        "adsContent1": "bAIble lets you chat with biblical characters using AI, based solely on the Holy Scriptures.",
+        "adsContent2": "Choose the language, Bible version, and talk to figures like Jesus, Paul, Mary, and many others.",
+        "adsContent3": "Perfect for Bible study, learning, and spiritual reflection."
     },
-    "cookies": {
-      "title": "Cookies",
-      "content": "We use cookies to improve your experience. You can disable cookies in your browser settings."
+    "versions": {
+        "niv": "Version RV1960",
+        "kjv": "Version NVI",
+        "nlt": "Version DHH",
+        "esv": "Version TLA"
     },
-    "thirdParty": {
-      "title": "Third-Party Services",
-      "content": "We use third-party services for analytics and advertising. These services may collect anonymous data about your usage."
+    "chat": {
+        "title": "Chat with {name}",
+        "placeholder": "Type your message...",
+        "send": "Send",
+        "clear": "Clear Chat",
+        "loading": "Thinking...",
+        "error": "Error sending message. Please try again.",
+        "typing": "is typing...",
+        "messagePlaceholder": "Type your message here..."
     },
-    "ads": {
-      "title": "Advertising",
-      "content": "We use ads to keep the service free. Ads are personalized based on your interests."
+    "characters": {
+        "bible": "Bible",
+        "jesus": "Jesus",
+        "abrao": "Abraham",
+        "moises": "Moses",
+        "davi": "David",
+        "salomao": "Solomon",
+        "isaias": "Isaiah",
+        "jeremias": "Jeremiah",
+        "daniel": "Daniel",
+        "oseias": "Hosea",
+        "joel": "Joel",
+        "amos": "Amos",
+        "obadias": "Obadiah",
+        "jonas": "Jonah",
+        "miqueias": "Micah",
+        "naum": "Nahum",
+        "habacuque": "Habakkuk",
+        "sofonias": "Zephaniah",
+        "ageu": "Haggai",
+        "zacarias": "Zechariah",
+        "malaquias": "Malachi",
+        "mateus": "Matthew",
+        "marcos": "Mark",
+        "lucas": "Luke",
+        "joao": "John",
+        "paulo": "Paul",
+        "pedro": "Peter",
+        "tiago": "James",
+        "judas": "Jude",
+        "mary": "Mary",
+        "elias": "Elijah",
+        "eliseu": "Elisha",
+        "noe": "Noah",
+        "jaco": "Jacob",
+        "isaque": "Isaac",
+        "jose": "Joseph",
+        "rute": "Ruth",
+        "ester": "Esther",
+        "sara": "Sarah",
+        "rebeca": "Rebecca",
+        "lia": "Leah",
+        "raquel": "Rachel",
+        "marta": "Martha",
+        "lazaro": "Lazarus",
+        "barnabe": "Barnabas",
+        "estevao": "Stephen",
+        "timoteo": "Timothy",
+        "tito": "Titus",
+        "filipe": "Philip",
+        "tome": "Thomas",
+        "andre": "Andrew",
+        "bartolomeu": "Bartholomew",
+        "matias": "Matthias",
+        "gideao": "Gideon",
+        "samuel": "Samuel",
+        "esdras": "Ezra",
+        "neemias": "Nehemiah",
+        "jo": "Job",
+        "ana": "Hannah",
+        "simeao": "Simeon",
+        "priscila": "Priscilla",
+        "aquila": "Aquila",
+        "urias": "Uriah",
+        "jesse": "Jesse",
+        "eli": "Eli",
+        "abigail": "Abigail",
+        "manasses": "Manasseh",
+        "ruben": "Reuben",
+        "benjamim": "Benjamin",
+        "naftali": "Naphtali",
+        "zebulom": "Zebulun",
+        "aser": "Asher",
+        "gade": "Gad",
+        "juda": "Judah",
+        "levi": "Levi",
+        "da": "Dan",
+        "calebe": "Caleb",
+        "bezalel": "Bezalel",
+        "zipora": "Zipporah",
+        "tamar": "Tamar",
+        "dalila": "Delilah",
+        "jezabel": "Jezebel",
+        "noemi": "Naomi",
+        "boaz": "Boaz"
+    },
+    "privacy": {
+        "title": "Privacy Policy",
+        "lastUpdated": "Last updated: 2024",
+        "dataCollection": {
+            "title": "Data Collection",
+            "content": "We only collect information necessary to improve your experience in the app. We do not share your personal data with third parties."
+        },
+        "cookies": {
+            "title": "Cookies",
+            "content": "We use cookies to improve your experience. You can disable cookies in your browser settings."
+        },
+        "thirdParty": {
+            "title": "Third-Party Services",
+            "content": "We use third-party services for analytics and advertising. These services may collect anonymous data about your usage."
+        },
+        "ads": {
+            "title": "Advertising",
+            "content": "We use ads to keep the service free. Ads are personalized based on your interests."
+        },
+        "contact": {
+            "title": "Contact",
+            "content": "For privacy questions, please contact us through the contact form."
+        }
+    },
+    "terms": {
+        "title": "Terms of Service",
+        "lastUpdated": "Last updated: 2024",
+        "acceptance": {
+            "title": "Acceptance of Terms",
+            "content": "By using our service, you agree to these terms of service."
+        },
+        "usage": {
+            "title": "Service Usage",
+            "content": "The service is provided 'as is' and must be used in accordance with applicable laws. Conversations with biblical characters are generated by artificial intelligence and may not fully reflect biblical events or teachings."
+        },
+        "aiDisclaimer": {
+            "title": "Artificial Intelligence Disclaimer",
+            "content": "Responses and interactions with biblical characters are generated by AI language models. While we strive to maintain accuracy and fidelity to the biblical text, responses may contain inaccuracies or interpretations that do not reflect the official doctrine of any religious denomination. We recommend that you always consult the Bible and qualified religious authorities for matters of faith and doctrine."
+        },
+        "intellectual": {
+            "title": "Intellectual Property",
+            "content": "All service content is protected by copyright and other intellectual property laws. AI-generated conversations are for personal use and should not be reproduced or distributed without permission."
+        },
+        "liability": {
+            "title": "Liability",
+            "content": "We are not liable for indirect damages caused by the use of the service. AI-generated responses are for educational and entertainment purposes and should not be considered as spiritual or religious advice."
+        },
+        "changes": {
+            "title": "Changes to Terms",
+            "content": "We reserve the right to modify these terms at any time."
+        }
     },
     "contact": {
-      "title": "Contact",
-      "content": "For privacy questions, please contact us through the contact form."
+        "title": "Contact",
+        "description": "Have a question, suggestion, or feedback? Contact us!",
+        "form": {
+            "name": "Name",
+            "email": "Email",
+            "subject": "Subject",
+            "message": "Message",
+            "submit": "Submit"
+        },
+        "validation": {
+            "nameRequired": "Name is required",
+            "nameMin": "Name must be at least 2 characters",
+            "emailRequired": "Email is required",
+            "emailValid": "Email must be valid",
+            "subjectRequired": "Subject is required",
+            "subjectMin": "Subject must be at least 3 characters",
+            "messageRequired": "Message is required",
+            "messageMin": "Message must be at least 10 characters"
+        },
+        "success": "Message sent successfully!",
+        "error": "Error sending message. Please try again.",
+        "info": {
+            "title": "Additional Information",
+            "content": "For urgent matters or technical support, you can also contact us at: support@baible.com"
+        }
     }
-  },
-  "terms": {
-    "title": "Terms of Service",
-    "lastUpdated": "Last updated: 2024",
-    "acceptance": {
-      "title": "Acceptance of Terms",
-      "content": "By using our service, you agree to these terms of service."
-    },
-    "usage": {
-      "title": "Service Usage",
-      "content": "The service is provided 'as is' and must be used in accordance with applicable laws. Conversations with biblical characters are generated by artificial intelligence and may not fully reflect biblical events or teachings."
-    },
-    "aiDisclaimer": {
-      "title": "Artificial Intelligence Disclaimer",
-      "content": "Responses and interactions with biblical characters are generated by AI language models. While we strive to maintain accuracy and fidelity to the biblical text, responses may contain inaccuracies or interpretations that do not reflect the official doctrine of any religious denomination. We recommend that you always consult the Bible and qualified religious authorities for matters of faith and doctrine."
-    },
-    "intellectual": {
-      "title": "Intellectual Property",
-      "content": "All service content is protected by copyright and other intellectual property laws. AI-generated conversations are for personal use and should not be reproduced or distributed without permission."
-    },
-    "liability": {
-      "title": "Liability",
-      "content": "We are not liable for indirect damages caused by the use of the service. AI-generated responses are for educational and entertainment purposes and should not be considered as spiritual or religious advice."
-    },
-    "changes": {
-      "title": "Changes to Terms",
-      "content": "We reserve the right to modify these terms at any time."
-    }
-  },
-  "contact": {
-    "title": "Contact",
-    "description": "Have a question, suggestion, or feedback? Contact us!",
-    "form": {
-      "name": "Name",
-      "email": "Email",
-      "subject": "Subject",
-      "message": "Message",
-      "submit": "Submit"
-    },
-    "validation": {
-      "nameRequired": "Name is required",
-      "nameMin": "Name must be at least 2 characters",
-      "emailRequired": "Email is required",
-      "emailValid": "Email must be valid",
-      "subjectRequired": "Subject is required",
-      "subjectMin": "Subject must be at least 3 characters",
-      "messageRequired": "Message is required",
-      "messageMin": "Message must be at least 10 characters"
-    },
-    "success": "Message sent successfully!",
-    "error": "Error sending message. Please try again.",
-    "info": {
-      "title": "Additional Information",
-      "content": "For urgent matters or technical support, you can also contact us at: support@baible.com"
-    }
-  }
-} 
+}
