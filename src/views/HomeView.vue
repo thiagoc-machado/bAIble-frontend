@@ -2,9 +2,9 @@
     <v-container class="fill-height pa-0" fluid>
         <v-row
             justify="center"
-            align="center"
+            align="start"
             no-gutters
-            style="min-height: 10vh"
+            style="height: 100%;"
         >
             <v-col cols="12" class="d-flex justify-center">
                 <v-card class="main-card" elevation="8" rounded="lg">
@@ -64,12 +64,12 @@
                                                 @error="
                                                     (e) =>
                                                         (e.target.src =
-                                                            '/images/characters/avatar-neutro.svg')
+                                                            '/images/characters/default.png')
                                                 "
                                             >
                                                 <template v-slot:error>
                                                     <v-img
-                                                        src="/images/characters/avatar-neutro.svg"
+                                                        src="/images/characters/default.png"
                                                         :alt="getCharacterName"
                                                         class="character-image"
                                                     />
@@ -150,12 +150,12 @@
                                                         @error="
                                                             (e) =>
                                                                 (e.target.src =
-                                                                    '/images/characters/avatar-neutro.svg')
+                                                                    '/images/characters/default.png')
                                                         "
                                                     >
                                                         <template v-slot:error>
                                                             <v-img
-                                                                src="/images/characters/avatar-neutro.svg"
+                                                                src="/images/characters/default.png"
                                                                 :alt="
                                                                     character.name
                                                                 "
@@ -300,46 +300,46 @@
                         hide-details
                         @update:model-value="handleModelChange"
                     />
-                </v-card-text>
-            </v-card>
-        </v-dialog>
-    </v-container>
-    <v-footer class="footer-links">
-        <v-row justify="center" class="text-center">
-            <v-col cols="12">
-                <v-btn
-                    variant="text"
-                    size="small"
-                    class="mx-1"
-                    :to="{ name: 'privacy' }"
-                >
-                    {{ $t("privacy.title") }}
-                </v-btn>
-                <v-btn
-                    variant="text"
-                    size="small"
-                    class="mx-1"
-                    :to="{ name: 'terms' }"
-                >
-                    {{ $t("terms.title") }}
-                </v-btn>
-                <v-btn
-                    variant="text"
-                    size="small"
-                    class="mx-1"
-                    :to="{ name: 'contact' }"
-                >
-                    {{ $t("contact.title") }}
-                </v-btn>
-            </v-col>
-        </v-row>
-    </v-footer>
-    <v-card-text>
-        <h1 class="text-h5 mb-2">{{ t("home.title") }}</h1>
-        <p>{{ t("home.adsContent1") }}</p>
-        <p>{{ t("home.adsContent2") }}</p>
-        <p>{{ t("home.adsContent3") }}</p>
-    </v-card-text>
+                  </v-card-text>
+                </v-card>
+              </v-dialog>
+            </v-container>
+            <v-footer class="footer-links">
+                <v-row justify="center" class="text-center">
+                    <v-col cols="12">
+                        <v-btn
+                            variant="text"
+                            size="small"
+                            class="mx-1"
+                            :to="{ name: 'privacy' }"
+                        >
+                            {{ $t("privacy.title") }}
+                        </v-btn>
+                        <v-btn
+                            variant="text"
+                            size="small"
+                            class="mx-1"
+                            :to="{ name: 'terms' }"
+                        >
+                            {{ $t("terms.title") }}
+                        </v-btn>
+                        <v-btn
+                            variant="text"
+                            size="small"
+                            class="mx-1"
+                            :to="{ name: 'contact' }"
+                        >
+                            {{ $t("contact.title") }}
+                        </v-btn>
+                    </v-col>
+                </v-row>
+            </v-footer>
+            <v-card-text class="text-center">
+                <h1 class="text-h5 mb-2">{{ t('home.title') }}</h1>
+                <p>{{ t('home.adsContent1') }}</p>
+                <p>{{ t('home.adsContent2') }}</p>
+                <p>{{ t('home.adsContent3') }}</p>
+            </v-card-text>
 </template>
 
 <script setup>
@@ -456,11 +456,16 @@
         });
     };
 
+    const popularIds = ['bible', 'jesus', 'abrao', 'moises', 'davi', 'salomao', 'paulo', 'pedro', 'joao'];
+
     const popularCharacters = computed(() =>
-        characters.slice(0, 9).map((char) => ({
-            id: char.id,
-            name: t(char.nameKey),
-        }))
+      popularIds.map((id) => {
+        const char = characters.find((c) => c.id === id);
+        return {
+          id: char.id,
+          name: t(char.nameKey),
+        };
+      })
     );
 
     const getCharacterImage = computed(() => {
@@ -801,9 +806,10 @@
 
     .footer-links {
         /* position: fixed; */
-        bottom: 0;
+        /* bottom: 0; */
         left: 0;
         right: 0;
+        margin-top: -6rem;
         background: transparent;
         z-index: 1;
         padding: 8px;

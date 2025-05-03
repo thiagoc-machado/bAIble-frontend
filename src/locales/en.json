@@ -30,6 +30,9 @@
         "messagePlaceholder": "Type your message here..."
     },
     "characters": {
+        "adam": "Adam",
+        "aaron": "Aaron",
+        "eve": "Eve",
         "bible": "Bible",
         "jesus": "Jesus",
         "abrao": "Abraham",

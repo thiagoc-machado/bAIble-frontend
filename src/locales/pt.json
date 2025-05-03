@@ -30,6 +30,10 @@
     "messagePlaceholder": "Digite sua mensagem aqui..."
   },
   "characters": {
+    "adam": "Adão",
+    "aaron": "Arão",
+    "eve": "Eva",
+    "abbadon": "Abadom",
     "bible": "Bíblia",
     "jesus": "Jesus",
     "abrao": "Abraão",
