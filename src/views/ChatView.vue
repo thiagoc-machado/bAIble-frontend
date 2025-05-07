@@ -64,8 +64,7 @@
                                         !message.isUser
                                             ? characterName
                                                 ? characterName + " -"
-                                                : userName +
-                                                  " -"
+                                                : userName + " -"
                                             : ""
                                     }}
                                     <span>
@@ -312,41 +311,50 @@
 
         loading.value = true;
 
-        try {
-            const response = await chatService.sendMessage({
-                message: messageText,
-                characterId: characterId.value,
-                version: route.query.version || "NVI",
-                language: locale.value,
-                model: "mistral-7b-instruct",
-                history: messages.value.slice(0, -1).map((msg) => ({
-                    text: msg.text,
-                    isUser: msg.isUser,
-                    timestamp: msg.timestamp.toISOString(),
-                })),
-            });
+        let attempts = 0;
+        let success = false;
 
-            messages.value.push({
-                text: response.message,
-                isUser: false,
-                time: formatTime(),
-                timestamp: new Date(),
-            });
+        while (attempts < 3 && !success) {
+            try {
+                const response = await chatService.sendMessage({
+                    message: messageText,
+                    characterId: characterId.value,
+                    version: route.query.version || "NVI",
+                    language: locale.value,
+                    model: "mistral-7b-instruct",
+                    history: messages.value.slice(0, -1).map((msg) => ({
+                        text: msg.text,
+                        isUser: msg.isUser,
+                        timestamp: msg.timestamp.toISOString(),
+                    })),
+                });
 
-            // Força o scroll para baixo após receber a resposta
-            await nextTick();
-            scrollToBottom(false);
-        } catch (error) {
-            console.error("Erro ao enviar mensagem:", error);
-            messages.value.push({
-                text: t("chat.errorMessage"),
-                isUser: false,
-                time: formatTime(),
-                timestamp: new Date(),
-            });
-        } finally {
-            loading.value = false;
+                messages.value.push({
+                    text: response.message,
+                    isUser: false,
+                    time: formatTime(),
+                    timestamp: new Date(),
+                });
+
+                success = true;
+            } catch (error) {
+                attempts++;
+                console.log("tentando novamente...", "tentativas: ", attempts);
+                sleep(2000); // Espera 1 segundo antes de tentar novamente
+                if (attempts === 3) {
+                    console.error("Erro ao enviar mensagem:", error);
+                    messages.value.push({
+                        text: t("error"),
+                        isUser: false,
+                        time: formatTime(),
+                        timestamp: new Date(),
+                    });
+                }
+            }
         }
+    };
+    const sleep = (ms) => {
+        return new Promise((resolve) => setTimeout(resolve, ms));
     };
 
     onMounted(() => {
@@ -507,7 +515,7 @@
         background-color: rgb(var(--v-theme-surface));
         color: rgb(var(--v-theme-on-surface));
         border: 1px solid rgba(var(--v-theme-primary), 0.15);
-        border-radius: 1rem!important;
+        border-radius: 1rem !important;
         border-top-left-radius: 0 !important;
     }
 
@@ -604,7 +612,6 @@
         border: 1px solid rgba(var(--v-theme-primary), 0.1);
         border-radius: 1rem;
         box-shadow: 0 2px 8px rgba(var(--v-theme-primary), 0.05);
-        
     }
 
     @keyframes fadeIn {
