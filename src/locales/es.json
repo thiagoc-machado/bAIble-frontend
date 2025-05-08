@@ -27,7 +27,8 @@
         "loading": "Pensando...",
         "error": "Error al enviar mensaje. Por favor, inténtalo de nuevo.",
         "typing": "está escribiendo...",
-        "messagePlaceholder": "Escribe tu mensaje aquí..."
+        "messagePlaceholder": "Escribe tu mensaje aquí...",
+        "funnyError": "Parece que se ha caído el Wi-Fi del cielo... ¡inténtalo de nuevo en un momento! ☁️📡"
     },
     "characters": {
         "adam": "Adán",

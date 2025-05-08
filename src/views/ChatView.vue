@@ -62,9 +62,10 @@
                                 <span class="message-time">
                                     {{
                                         !message.isUser
-                                            ? characterName
-                                                ? characterName + " -"
-                                                : userName + " -"
+                                            ? characterName || userName
+                                                ? (characterName || userName) +
+                                                  " -"
+                                                : ""
                                             : ""
                                     }}
                                     <span>
@@ -316,40 +317,55 @@
 
         while (attempts < 3 && !success) {
             try {
-                const response = await chatService.sendMessage({
-                    message: messageText,
-                    characterId: characterId.value,
-                    version: route.query.version || "NVI",
-                    language: locale.value,
-                    model: "mistral-7b-instruct",
-                    history: messages.value.slice(0, -1).map((msg) => ({
-                        text: msg.text,
-                        isUser: msg.isUser,
-                        timestamp: msg.timestamp.toISOString(),
-                    })),
-                });
+                while (attempts < 3 && !success) {
+                    try {
+                        const response = await chatService.sendMessage({
+                            message: messageText,
+                            characterId: characterId.value,
+                            version: route.query.version || "NVI",
+                            language: locale.value,
+                            model: "mistral-7b-instruct",
+                            history: messages.value.slice(0, -1).map((msg) => ({
+                                text: msg.text,
+                                isUser: msg.isUser,
+                                timestamp: msg.timestamp.toISOString(),
+                            })),
+                        });
 
+                        messages.value.push({
+                            text: response.message,
+                            isUser: false,
+                            time: formatTime(),
+                            timestamp: new Date(),
+                        });
+
+                        success = true;
+                    } catch (error) {
+                        attempts++;
+                        console.log(
+                            "Tentativa falhou, tentando novamente...",
+                            attempts
+                        );
+                        await sleep(2000); // espera 2 segundos antes da próxima tentativa
+                        if (attempts === 3) throw error;
+                    }
+                }
+            } catch (error) {
+                console.error("Erro ao enviar mensagem:", error);
+                const characterNameSafe =
+                    characterName.value ||
+                    characterId.value ||
+                    t("chat.characterDefaultName");
                 messages.value.push({
-                    text: response.message,
+                    text: t("chat.funnyError", {
+                        characterName: characterNameSafe,
+                    }),
                     isUser: false,
                     time: formatTime(),
                     timestamp: new Date(),
                 });
-
-                success = true;
-            } catch (error) {
-                attempts++;
-                console.log("tentando novamente...", "tentativas: ", attempts);
-                sleep(2000); // Espera 1 segundo antes de tentar novamente
-                if (attempts === 3) {
-                    console.error("Erro ao enviar mensagem:", error);
-                    messages.value.push({
-                        text: t("error"),
-                        isUser: false,
-                        time: formatTime(),
-                        timestamp: new Date(),
-                    });
-                }
+            } finally {
+                loading.value = false;
             }
         }
     };

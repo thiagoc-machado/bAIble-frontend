@@ -27,7 +27,8 @@
         "loading": "Thinking...",
         "error": "Error sending message. Please try again.",
         "typing": "is typing...",
-        "messagePlaceholder": "Type your message here..."
+        "messagePlaceholder": "Type your message here...",
+        "funnyError": "Looks like heaven's Wi-Fi went down... try again in a moment! ☁️📡"
     },
     "characters": {
         "adam": "Adam",
