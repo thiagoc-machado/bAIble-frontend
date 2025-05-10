@@ -17,7 +17,8 @@
     "nvi": "Versão NVI",
     "ara": "Versão ARA",
     "acf": "Versão ACF",
-    "ntlh": "Versão NTLH"
+    "ntlh": "Versão NTLH",
+    "almeida_ra": "Almeida Revista e Atualizada"
   },
   "chat": {
     "title": "Conversa com {name}",

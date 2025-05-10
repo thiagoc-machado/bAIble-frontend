@@ -1,11 +1,6 @@
 <template>
     <v-container class="fill-height pa-0" fluid>
-        <v-row
-            justify="center"
-            align="start"
-            no-gutters
-            style="height: 100%;"
-        >
+        <v-row justify="center" align="start" no-gutters style="height: 100%">
             <v-col cols="12" class="d-flex justify-center">
                 <v-card class="main-card" elevation="8" rounded="lg">
                     <div class="app-header text-center">
@@ -217,7 +212,11 @@
                                                 density="comfortable"
                                                 hide-details
                                                 class="mt-2"
+                                                style="min-width: 200px"
                                             />
+                                            <template v-slot:item="{ item }">
+                                                <div>{{ t(item.nameKey) }}</div>
+                                            </template>
                                         </v-list-item>
                                         <v-list-item>
                                             <v-select
@@ -300,46 +299,46 @@
                         hide-details
                         @update:model-value="handleModelChange"
                     />
-                  </v-card-text>
-                </v-card>
-              </v-dialog>
-            </v-container>
-            <v-footer class="footer-links">
-                <v-row justify="center" class="text-center">
-                    <v-col cols="12">
-                        <v-btn
-                            variant="text"
-                            size="small"
-                            class="mx-1"
-                            :to="{ name: 'privacy' }"
-                        >
-                            {{ $t("privacy.title") }}
-                        </v-btn>
-                        <v-btn
-                            variant="text"
-                            size="small"
-                            class="mx-1"
-                            :to="{ name: 'terms' }"
-                        >
-                            {{ $t("terms.title") }}
-                        </v-btn>
-                        <v-btn
-                            variant="text"
-                            size="small"
-                            class="mx-1"
-                            :to="{ name: 'contact' }"
-                        >
-                            {{ $t("contact.title") }}
-                        </v-btn>
-                    </v-col>
-                </v-row>
-            </v-footer>
-            <v-card-text class="text-center">
-                <h1 class="text-h5 mb-2">{{ t('home.title') }}</h1>
-                <p>{{ t('home.adsContent1') }}</p>
-                <p>{{ t('home.adsContent2') }}</p>
-                <p>{{ t('home.adsContent3') }}</p>
-            </v-card-text>
+                </v-card-text>
+            </v-card>
+        </v-dialog>
+    </v-container>
+    <v-footer class="footer-links">
+        <v-row justify="center" class="text-center">
+            <v-col cols="12">
+                <v-btn
+                    variant="text"
+                    size="small"
+                    class="mx-1"
+                    :to="{ name: 'privacy' }"
+                >
+                    {{ $t("privacy.title") }}
+                </v-btn>
+                <v-btn
+                    variant="text"
+                    size="small"
+                    class="mx-1"
+                    :to="{ name: 'terms' }"
+                >
+                    {{ $t("terms.title") }}
+                </v-btn>
+                <v-btn
+                    variant="text"
+                    size="small"
+                    class="mx-1"
+                    :to="{ name: 'contact' }"
+                >
+                    {{ $t("contact.title") }}
+                </v-btn>
+            </v-col>
+        </v-row>
+    </v-footer>
+    <v-card-text class="text-center">
+        <h1 class="text-h5 mb-2">{{ t("home.title") }}</h1>
+        <p>{{ t("home.adsContent1") }}</p>
+        <p>{{ t("home.adsContent2") }}</p>
+        <p>{{ t("home.adsContent3") }}</p>
+    </v-card-text>
 </template>
 
 <script setup>
@@ -355,7 +354,11 @@
     const toggleTheme = inject("toggleTheme");
     const theme = ref(localStorage.getItem("theme") || "auto");
     const selectedCharacter = ref(null);
-    const selectedVersion = ref(localStorage.getItem("bibleVersion") || null);
+    const selectedVersion = ref(
+        localStorage.getItem("bibleVersion") ||
+            versions[locale.value]?.[0]?.id ||
+            null
+    );
     const selectedModel = ref(
         localStorage.getItem("selectedModel") || "google/gemini-pro:free"
     );
@@ -376,6 +379,7 @@
     const changeLanguage = (lang) => {
         locale.value = lang;
         localStorage.setItem("language", lang);
+        localStorage.removeItem("bibleVersion");
     };
 
     const vibrantColors = [
@@ -456,16 +460,26 @@
         });
     };
 
-    const popularIds = ['bible', 'jesus', 'abrao', 'moises', 'davi', 'salomao', 'paulo', 'pedro', 'joao'];
+    const popularIds = [
+        "bible",
+        "jesus",
+        "abrao",
+        "moises",
+        "davi",
+        "salomao",
+        "paulo",
+        "pedro",
+        "joao",
+    ];
 
     const popularCharacters = computed(() =>
-      popularIds.map((id) => {
-        const char = characters.find((c) => c.id === id);
-        return {
-          id: char.id,
-          name: t(char.nameKey),
-        };
-      })
+        popularIds.map((id) => {
+            const char = characters.find((c) => c.id === id);
+            return {
+                id: char.id,
+                name: t(char.nameKey),
+            };
+        })
     );
 
     const getCharacterImage = computed(() => {
@@ -507,6 +521,13 @@
                     toggleTheme(e.matches ? "dark" : "light");
                 }
             });
+        }
+    });
+
+    // Watch para mudanças no idioma
+    watch(locale, (newLocale) => {
+        if (!localStorage.getItem("bibleVersion")) {
+            selectedVersion.value = versions[newLocale]?.[0]?.id || null;
         }
     });
 

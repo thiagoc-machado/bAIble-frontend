@@ -15,9 +15,9 @@
     },
     "versions": {
         "niv": "Version RV1960",
-        "kjv": "Version NVI",
         "nlt": "Version DHH",
-        "esv": "Version TLA"
+        "esv": "Version TLA",
+        "kjv": "King James Version"
     },
     "chat": {
         "title": "Chat with {name}",
