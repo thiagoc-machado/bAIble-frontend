@@ -195,7 +195,7 @@
         "error": "Error sending message. Please try again.",
         "info": {
             "title": "Additional Information",
-            "content": "For urgent matters or technical support, you can also contact us at: thiagocmach@@gmail.com"
+            "content": "For urgent matters or technical support, you can also contact us at: {email}"
         }
     }
 }

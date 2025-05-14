@@ -197,7 +197,7 @@
     "error": "Erro ao enviar mensagem. Tente novamente.",
     "info": {
       "title": "Informações Adicionais",
-      "content": "Para questões urgentes ou suporte técnico, você também pode nos contatar através do email: thiagocmach@@gmail.com"
+      "content": "Para questões urgentes ou suporte técnico, você também pode nos contatar através do email: {email}"
     }
   }
 } 

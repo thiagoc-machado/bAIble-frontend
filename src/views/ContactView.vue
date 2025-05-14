@@ -56,7 +56,7 @@
 
           <div class="mt-6">
             <h2 class="text-h6 mb-3">{{ $t('contact.info.title') }}</h2>
-            <p class="text-body-1">{{ $t('contact.info.content') }}</p>
+            <p class="text-body-1">{{ $t('contact.info.content', { email: 'thiagocmach@gmail.com' }) }}</p>
           </div>
         </v-card>
       </v-col>
