@@ -6,32 +6,35 @@
           <v-btn icon="mdi-arrow-left" @click="goBack" variant="text" />
           <h1 class="text-h4 mb-6">{{ $t('contact.title') }}</h1>
           <p class="text-body-1 mb-6">{{ $t('contact.description') }}</p>
-          
-          <v-form ref="form" v-model="valid" @submit.prevent="submitForm">
+
+          <v-form ref="formRef" v-model="valid" @submit.prevent="submitForm">
             <v-text-field
               v-model="name"
               :label="$t('contact.form.name')"
               :rules="nameRules"
               required
               class="mb-4"
+              name="name"
             />
-            
+
             <v-text-field
               v-model="email"
               :label="$t('contact.form.email')"
               :rules="emailRules"
               required
               class="mb-4"
+              name="email"
             />
-            
+
             <v-text-field
               v-model="subject"
               :label="$t('contact.form.subject')"
               :rules="subjectRules"
               required
               class="mb-4"
+              name="subject"
             />
-            
+
             <v-textarea
               v-model="message"
               :label="$t('contact.form.message')"
@@ -39,8 +42,9 @@
               required
               rows="4"
               class="mb-4"
+              name="message"
             />
-            
+
             <v-btn
               color="primary"
               type="submit"
@@ -56,7 +60,9 @@
 
           <div class="mt-6">
             <h2 class="text-h6 mb-3">{{ $t('contact.info.title') }}</h2>
-            <p class="text-body-1">{{ $t('contact.info.content', { email: 'thiagocmach@gmail.com' }) }}</p>
+            <p class="text-body-1">
+              {{ $t('contact.info.content', { email: 'thiagocmach@gmail.com' }) }}
+            </p>
           </div>
         </v-card>
       </v-col>
@@ -67,12 +73,13 @@
 <script setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import axios from 'axios'
 import { useRouter } from 'vue-router'
-const router = useRouter()
+import emailjs from '@emailjs/browser'
 
 const { t } = useI18n()
-const form = ref(null)
+const router = useRouter()
+
+const formRef = ref(null)
 const valid = ref(false)
 const loading = ref(false)
 
@@ -102,34 +109,38 @@ const messageRules = [
 ]
 
 const submitForm = async () => {
-  if (!form.value.validate()) return
-  
-  loading.value = true
-  try {
-    const response = await axios.post('/api/contact', {
-      name: name.value,
-      email: email.value,
-      subject: subject.value,
-      message: message.value
-    })
+  if (!formRef.value.validate()) return
 
-    if (response.status === 200) {
-      alert(t('contact.success'))
-      // Limpar o formulário
-      name.value = ''
-      email.value = ''
-      subject.value = ''
-      message.value = ''
-      form.value.reset()
-    }
+  loading.value = true
+
+  try {
+    await emailjs.send(
+      'service_ey4oxzo',
+      'template_xbuhk1b',
+      {
+        name: name.value,
+        email: email.value,
+        subject: subject.value,
+        message: message.value
+      },
+      '3PaqMmy4pZ6WPjmFa'
+    )
+
+    alert(t('contact.success'))
+    name.value = ''
+    email.value = ''
+    subject.value = ''
+    message.value = ''
+    formRef.value.reset()
   } catch (error) {
-    console.error('Erro ao enviar mensagem:', error)
+    console.error('Erro ao enviar:', error)
     alert(t('contact.error'))
   } finally {
     loading.value = false
   }
 }
+
 const goBack = () => {
   router.push('/')
 }
-</script> 
+</script>
