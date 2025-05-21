@@ -11,7 +11,24 @@
         "language": "Idioma",
         "adsContent1": "bAIble te permite conversar con personajes bíblicos mediante inteligencia artificial, basado exclusivamente en las Escrituras.",
         "adsContent2": "Puedes elegir el idioma, la versión de la Biblia e interactuar con personajes como Jesús, Pablo, María y muchos más.",
-        "adsContent3": "Ideal para estudios bíblicos, aprendizaje y momentos de reflexión espiritual."
+        "adsContent3": "Ideal para estudios bíblicos, aprendizaje y momentos de reflexión espiritual.",
+        "aboutTitle": "¿Qué es bAIble?",
+        "aboutContent": "bAIble es un asistente de IA basado en la Biblia que te permite conversar con personajes bíblicos en un lenguaje sencillo. Responde exclusivamente según las Escrituras Sagradas, promoviendo el aprendizaje y la reflexión espiritual.",
+        "howItWorksTitle": "¿Cómo funciona?",
+        "howItWorksContent": "Elige un personaje, envía tu pregunta y bAIble responderá con fidelidad al contexto bíblico. El sistema utiliza IA con recuperación de pasajes relevantes (RAG) para mantener la fidelidad al texto.",
+        "benefitsTitle": "¿Por qué usar bAIble?",
+        "benefits": [
+            "✅ 100% basado en la Biblia Sagrada",
+            "✅ Gratis y sin anuncios invasivos",
+            "✅ Disponible en español, portugués e inglés",
+            "✅ Ideal para estudios bíblicos, devocionales y discipulados",
+            "✅ Puedes hablar con personajes como Jesús, Pablo y Moisés",
+            "✅ Diseño moderno y adaptado a cualquier dispositivo",
+            "✅ Respuestas claras y fieles a las Escrituras",
+            "✅ Sin contenido externo a la Biblia",
+            "✅ Mejorado constantemente con actualizaciones",
+            "✅ Enfocado en la fe, el aprendizaje y la reflexión cristiana"
+        ]
     },
     "versions": {
         "rv_1858": "Versión Reina-Valera 1858",
@@ -197,5 +214,9 @@
             "title": "Información Adicional",
             "content": "Para asuntos urgentes o soporte técnico, también puedes contactarnos en: {email}"
         }
+    },
+    "cookies": {
+        "message": "Utilizamos cookies para mejorar tu experiencia. Al continuar, aceptas el uso de cookies.",
+        "accept": "Aceptar"
     }
 }

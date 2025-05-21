@@ -1,5 +1,5 @@
 <template>
-    <v-container class="fill-height pa-0" fluid>
+    <v-container class="pa-0" fluid>
         <v-row justify="center" align="start" no-gutters style="height: 100%">
             <v-col cols="12" class="d-flex justify-center">
                 <v-card class="main-card" elevation="8" rounded="lg">
@@ -303,6 +303,36 @@
             </v-card>
         </v-dialog>
     </v-container>
+    <v-container class="py-10 px-10 pa-0" >
+        <v-row>
+            <v-col cols="12" md="6">
+                <h2 class="text-h5 font-weight-bold mb-2">
+                    {{ $t("home.aboutTitle") }}
+                </h2>
+                <p class="text-body-1">{{ $t("home.aboutContent") }}</p>
+            </v-col>
+
+            <v-col cols="12" md="6">
+                <h2 class="text-h5 font-weight-bold mb-2">
+                    {{ $t("home.howItWorksTitle") }}
+                </h2>
+                <p class="text-body-1">{{ $t("home.howItWorksContent") }}</p>
+            </v-col>
+        </v-row>
+
+        <v-row class="mt-6">
+            <v-col cols="12">
+                <h2 class="text-h5 font-weight-bold mb-2">
+                    {{ $t("home.benefitsTitle") }}
+                </h2>
+                <ul class="text-body-1">
+                    <li v-for="(benefit, i) in $tm('home.benefits')" :key="i">
+                        {{ benefit }}
+                    </li>
+                </ul>
+            </v-col>
+        </v-row>
+    </v-container>
     <v-footer class="footer-links">
         <v-row justify="center" class="text-center">
             <v-col cols="12">
@@ -333,12 +363,6 @@
             </v-col>
         </v-row>
     </v-footer>
-    <v-card-text class="text-center">
-        <h1 class="text-h5 mb-2">{{ t("home.title") }}</h1>
-        <p>{{ t("home.adsContent1") }}</p>
-        <p>{{ t("home.adsContent2") }}</p>
-        <p>{{ t("home.adsContent3") }}</p>
-    </v-card-text>
 </template>
 
 <script setup>
@@ -466,7 +490,6 @@
         "abrao",
         "moises",
         "davi",
-        "salomao",
         "paulo",
         "pedro",
         "joao",
@@ -565,6 +588,7 @@
         margin: 0 auto;
         background: transparent;
         box-shadow: none;
+        border-radius: 24px 24px 10px 10px !important;
     }
 
     .app-header {
@@ -827,13 +851,13 @@
 
     .footer-links {
         /* position: fixed; */
-        /* bottom: 0; */
+        bottom: 0;
         left: 0;
         right: 0;
-        margin-top: -6rem;
+        margin-top: 0;
         background: transparent;
         z-index: 1;
-        padding: 8px;
+        padding: 0px;
         opacity: 0.6;
         transition: opacity 0.3s;
     }

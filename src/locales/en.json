@@ -11,7 +11,24 @@
         "language": "Language",
         "adsContent1": "bAIble lets you chat with biblical characters using AI, based solely on the Holy Scriptures.",
         "adsContent2": "Choose the language, Bible version, and talk to figures like Jesus, Paul, Mary, and many others.",
-        "adsContent3": "Perfect for Bible study, learning, and spiritual reflection."
+        "adsContent3": "Perfect for Bible study, learning, and spiritual reflection.",
+        "benefitsTitle": "Why use bAIble?",
+        "aboutTitle": "What is bAIble?",
+        "aboutContent": "bAIble is an AI assistant based on the Bible that allows you to talk with biblical characters in plain language. It responds exclusively based on the Holy Scriptures, promoting learning and spiritual reflection.",
+        "howItWorksTitle": "How does it work?",
+        "howItWorksContent": "Choose a character, send your question, and bAIble will reply faithfully to the biblical context. The system uses AI with relevant passage retrieval (RAG) to ensure accuracy to the text.",
+        "benefits": [
+            "✅ 100% based on the Holy Bible",
+            "✅ Free and without intrusive ads",
+            "✅ Available in English, Spanish, and Portuguese",
+            "✅ Perfect for Bible study, devotionals, and discipleship",
+            "✅ Talk to biblical characters like Jesus, Paul, and Moses",
+            "✅ Modern design, responsive on any device",
+            "✅ Clear and faithful answers from the Scriptures",
+            "✅ No use of content outside the Bible",
+            "✅ Frequently updated with improvements",
+            "✅ Focused on faith, learning, and Christian reflection"
+        ]
     },
     "versions": {
         "niv": "Version RV1960",
@@ -197,5 +214,9 @@
             "title": "Additional Information",
             "content": "For urgent matters or technical support, you can also contact us at: {email}"
         }
+    },
+    "cookies": {
+        "message": "We use cookies to improve your experience. By using our service, you agree to our use of cookies.",
+        "accept": "Accept"
     }
 }

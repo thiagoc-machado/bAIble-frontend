@@ -3,6 +3,7 @@
     <v-main class="main-container">
       <v-container fluid class="pa-0">
         <router-view />
+        <CookieConsent />
       </v-container>
     </v-main>
   </v-app>
@@ -10,6 +11,7 @@
 
 <script setup>
 import { ref, provide, onMounted } from 'vue'
+import CookieConsent from '@/views/CookieConsent.vue'
 
 const theme = ref('light')
 
