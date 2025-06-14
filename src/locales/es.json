@@ -28,6 +28,21 @@
             "✅ Sin contenido externo a la Biblia",
             "✅ Mejorado constantemente con actualizaciones",
             "✅ Enfocado en la fe, el aprendizaje y la reflexión cristiana"
+        ],
+        "faqTitle": "Preguntas Frecuentes",
+        "faq": [
+            {
+                "question": "¿Es bAIble gratis?",
+                "answer": "Sí, bAIble es totalmente gratis y se mantiene con anuncios no invasivos."
+            },
+            {
+                "question": "¿Funciona sin conexión?",
+                "answer": "No, se requiere conexión a internet para generar las respuestas."
+            },
+            {
+                "question": "¿Las respuestas son precisas?",
+                "answer": "Las respuestas se generan con IA y referencias bíblicas, pero debes confirmar en las Escrituras."
+            }
         ]
     },
     "versions": {
