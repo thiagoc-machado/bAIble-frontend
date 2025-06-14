@@ -28,6 +28,21 @@
             "✅ No use of content outside the Bible",
             "✅ Frequently updated with improvements",
             "✅ Focused on faith, learning, and Christian reflection"
+        ],
+        "faqTitle": "Frequently Asked Questions",
+        "faq": [
+            {
+                "question": "Is bAIble free to use?",
+                "answer": "Yes, bAIble is completely free and supported by non-intrusive ads."
+            },
+            {
+                "question": "Does it work offline?",
+                "answer": "No, an active internet connection is required to generate responses."
+            },
+            {
+                "question": "Are the answers accurate?",
+                "answer": "All answers are generated using AI with references from the Bible, but please verify with the Scriptures."
+            }
         ]
     },
     "versions": {
