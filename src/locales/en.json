@@ -28,6 +28,27 @@
             "✅ No use of content outside the Bible",
             "✅ Frequently updated with improvements",
             "✅ Focused on faith, learning, and Christian reflection"
+        ],
+        "missionTitle": "Our Mission",
+        "missionContent": "Our mission is to connect people with the Word of God using cutting-edge technology so that Bible study becomes accessible and relevant to modern life.",
+        "techTitle": "Technology Behind bAIble",
+        "techContent": "bAIble uses retrieval-augmented generation to provide accurate biblical responses, combining trusted translations with advanced AI.",
+        "privacyTitle": "Privacy & Ads",
+        "privacyContent": "We respect your privacy and only collect minimal data needed to operate. Non-intrusive ads keep the service free.",
+        "faqTitle": "Frequently Asked Questions",
+        "faq": [
+            {
+                "question": "Is bAIble free to use?",
+                "answer": "Yes, bAIble is completely free and supported by non-intrusive ads."
+            },
+            {
+                "question": "Does it work offline?",
+                "answer": "No, an active internet connection is required to generate responses."
+            },
+            {
+                "question": "Are the answers accurate?",
+                "answer": "All answers are generated using AI with references from the Bible, but please verify with the Scriptures."
+            }
         ]
     },
     "versions": {

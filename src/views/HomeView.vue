@@ -332,6 +332,48 @@
                 </ul>
             </v-col>
         </v-row>
+        <v-row class="mt-6">
+            <v-col cols="12" md="6">
+                <h2 class="text-h5 font-weight-bold mb-2">
+                    {{ $t('home.missionTitle') }}
+                </h2>
+                <p class="text-body-1">{{ $t('home.missionContent') }}</p>
+            </v-col>
+            <v-col cols="12" md="6">
+                <h2 class="text-h5 font-weight-bold mb-2">
+                    {{ $t('home.techTitle') }}
+                </h2>
+                <p class="text-body-1">{{ $t('home.techContent') }}</p>
+            </v-col>
+        </v-row>
+        <v-row class="mt-6">
+            <v-col cols="12">
+                <h2 class="text-h5 font-weight-bold mb-2">
+                    {{ $t('home.privacyTitle') }}
+                </h2>
+                <p class="text-body-1">{{ $t('home.privacyContent') }}</p>
+            </v-col>
+        </v-row>
+        <v-row class="mt-6">
+            <v-col cols="12">
+                <h2 class="text-h5 font-weight-bold mb-2">
+                    {{ $t('home.faqTitle') }}
+                </h2>
+                <v-expansion-panels>
+                    <v-expansion-panel
+                        v-for="(item, i) in $tm('home.faq')"
+                        :key="i"
+                    >
+                        <v-expansion-panel-title>
+                            {{ item.question }}
+                        </v-expansion-panel-title>
+                        <v-expansion-panel-text>
+                            {{ item.answer }}
+                        </v-expansion-panel-text>
+                    </v-expansion-panel>
+                </v-expansion-panels>
+            </v-col>
+        </v-row>
     </v-container>
     <v-footer class="footer-links">
         <v-row justify="center" class="text-center">

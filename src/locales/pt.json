@@ -28,6 +28,27 @@
             "✅ Não utiliza conteúdo fora das Escrituras",
             "✅ Atualizado constantemente com melhorias",
             "✅ Foco em aprendizado, fé e reflexão cristã"
+        ],
+        "missionTitle": "Nossa Missão",
+        "missionContent": "Nossa missão é conectar pessoas à Palavra de Deus usando tecnologia avançada, tornando o estudo bíblico acessível e relevante no dia a dia.",
+        "techTitle": "Tecnologia por Trás do bAIble",
+        "techContent": "O bAIble utiliza geração aumentada por busca (RAG) para oferecer respostas precisas, unindo traduções confiáveis a uma IA avançada.",
+        "privacyTitle": "Privacidade e Anúncios",
+        "privacyContent": "Respeitamos sua privacidade e coletamos apenas os dados mínimos necessários. Anúncios não invasivos mantêm o serviço gratuito.",
+        "faqTitle": "Perguntas Frequentes",
+        "faq": [
+            {
+                "question": "O bAIble é gratuito?",
+                "answer": "Sim, o bAIble é totalmente gratuito e sustentado por anúncios não invasivos."
+            },
+            {
+                "question": "Funciona offline?",
+                "answer": "Não, é necessário estar conectado à internet para gerar as respostas."
+            },
+            {
+                "question": "As respostas são precisas?",
+                "answer": "As respostas são geradas com IA utilizando trechos da Bíblia, mas sempre confira com as Escrituras."
+            }
         ]
     },
     "versions": {
